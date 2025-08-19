@@ -23,9 +23,9 @@
             margin-bottom: 40px;
         }
 
-        h2 {
+        .section-title {
             text-align: left;
-            color: #5B5B5B
+            color: #5B5B5B;
             margin-bottom: 10px;
             border-bottom: 1px solid;
             padding-bottom: 10px;
@@ -47,11 +47,16 @@
             position: relative;
         }
 
-        .job-card .h2 {
+        .card-header {
+            display: flex;
+            justify-content: spae-between;
+            align-items: center
+            margin-bottom: 10px;
+        }
+
+        .job-card h2 {
             color: #0072E3;
-            margin-top: 0;
-            border-bottom: none;
-            padding-bottom: 0;
+            margin: 0;
         }
 
         .job-card .summary {
@@ -92,12 +97,10 @@
         }
 
         .department {
-            position: absolute;
-            top: 15px;
-            right: 25px;
             font-weight: bold;
             color: #0072E3;
             font-size: 0.9em;
+            white-space: nowrap;
         }
         
     </style>
@@ -107,7 +110,7 @@
     <div class="container">
         <h1>Internal Transfer</h1>
 
-        <h2>Requirements</h2>
+        <h2 class="section-title">Requirements</h2>
         
         <p class="intro-text">
           If the employee applicant meets the minimum competencies for the position, the employee applicant will be scheduled to interview with the hiring manager. <br>
