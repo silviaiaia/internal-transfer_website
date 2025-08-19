@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>internal transfer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif, Microsoft JhengHei;
+            background-color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: left;
+            color: #000000;
+            margin-bottom: 40px;
+        }
+
+        .intro-text {
+            text-align: left;
+            color: #000000;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+        }
+
+        .job-card {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .job-card h2 {
+            color: #0077FF;
+            margin-top: 0;
+        }
+
+        .job-card .summary {
+            color: #000000;
+            line-height: 1.6;
+        }
+
+        .job-card .more-info {
+            display: none;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px dashed;
+        }
+
+        .job-card .more-info h3 {
+            margin-top: 0;
+            color: #000000;
+        }
+
+        .job-card ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .job-card button {
+            background-color: #0077FF;
+            color: #000000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .job-card button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Internal Transfer</h1>
+
+        <p class="intro-text">
+          Requirements:
+          If the employee applicant meets the minimum competencies for the position, the employee applicant will be scheduled to interview with the hiring manager.  In addition to meeting the minimum competencies for the position, employee applicant must meet the following criteria:
+          1.    The employee applicant must be in the current position for twelve(12) months; 
+          2.    The employee applicant must be rated as S(Satisfactory) or above in the latest performance rating cycle;
+          3.    An employee applicant on a Performance Improvement Plan(PIP) may not apply for a new position or transfer.
+        </p>
+        
+        <div class="job-card">
+            <h2>Software Engineer</h2>
+            <p class="summary">Responsible for designing, developing, testing and maintaining software applications.</p>
+            <button onclick="toggleInfo('se')">more info</button>
+            <div id="se" class="more-info">
+                <h3>Job Description</h3>
+                <ul>
+                    <li>Develop efficient and reliable code.</li>
+                    <li>Participate in requirements analysis, system design and architecture planning.</li>
+                    <li>Perform unit testing and integration testing to ensure software quality.</li>
+                    <li>Collaborate with cross-departmental teams to solve technical problems.</li>
+                </ul>
+                <h3>Required skills</h3>
+                <p>Proficiency in at least one programming language (e.g., Python, Java, JavaScript), familiarity with version control tools (e.g., Git), and good problem-solving skills are required.</p>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <h2>Project Manager</h2>
+            <p class="summary">Responsible for planning, executing and monitoring projects to ensure they are completed on schedule and within budget.</p>
+            <button onclick="toggleInfo('pm')">more info</button>
+            <div id="pm" class="more-info">
+                <h3>Job Description</h3>
+                <ul>
+                    <li>Define project scope, objectives, and deliverables.</li>
+                    <li>Manage project timelines, resources, and risks.</li>
+                    <li>Coordinate internal teams with external stakeholders.</li>
+                    <li>Report project progress to management regularly.</li>
+                </ul>
+                <h3>Required skills</h3>
+                <p>Excellent communication and organizational skills, familiarity with project management methodologies (such as Agile, Scrum), and leadership skills.</p>
+            </div>
+        </div>
+
+        <div class="job-card">
+            <h2>Marketing Specialist</h2>
+            <p class="summary">Responsible for planning and executing marketing activities to enhance brand awareness and product sales.</p>
+            <button onclick="toggleInfo('ms')">more info</button>
+            <div id="ms" class="more-info">
+                <h3>Job Description</h3>
+                <ul>
+                    <li>Develop marketing strategies and plans.</li>
+                    <li>Manage social media platforms and content distribution.</li>
+                    <li>Analyze market trends and competitors.</li>
+                    <li>Execute online or offline promotional activities.</li>
+                </ul>
+                <h3>Required skills</h3>
+                <p>Possess market analysis skills, familiarity with digital marketing tools (e.g. Google Analytics, SEO), and possess creative and copywriting skills.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleInfo(id) {
+            const element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
