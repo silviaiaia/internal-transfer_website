@@ -105,87 +105,205 @@
             font-size: 0.9em;
             white-space: nowrap;
         }
+
+        .language-switcher {
+            text-align: right;
+            padding: 20px 20px 0 0;
+        }
+
+        .lang-en { display: block; }
+        .lang-zh { display: none; }
         
     </style>
 </head>
 <body>
+    <div class="language-switcher">
+        <button id="lang-toggle-btn">English / 中文</button>
+    </div>
 
-    <div class="container">
+    <div class="lang-en">
         <h1>Internal Transfer</h1>
+    </div>
+    <div class="lang-zh">
+        <h1>內部轉調</h1>
+    </div>
 
+    <div class="lang-en">
         <h2 class="section-title">Requirements</h2>
+    </div>
+    <div class="lang-zh">
+        <h2 class="section-title">資格</h2>
+    </div>
         
+    <div class="lang-en">
         <p class="intro-text">
-          If the employee applicant meets the minimum competencies for the position, the employee applicant will be scheduled to interview with the hiring manager. <br>
-          In addition to meeting the minimum competencies for the position, employee applicant must meet the following criteria: <br>
-          1.    The employee applicant must be in the current position for twelve(12) months; <br>
-          2.    The employee applicant must be rated as S(Satisfactory) or above in the latest performance rating cycle; <br>
-          3.    An employee applicant on a Performance Improvement Plan(PIP) may not apply for a new position or transfer.
+            If the employee applicant meets the minimum competencies for the position, the employee applicant will be scheduled to interview with the hiring manager. <br>
+            In addition to meeting the minimum competencies for the position, employee applicant must meet the following criteria: <br>
+            1.   The employee applicant must be in the current position for twelve(12) months; <br>
+            2.   The employee applicant must be rated as S(Satisfactory) or above in the latest performance rating cycle; <br>
+            3.   An employee applicant on a Performance Improvement Plan(PIP) may not apply for a new position or transfer.
         </p>
+    </div>
+    <div class="lang-zh">
+        <p class="intro-text">
+            如果員工申請人符合該職位的基本能力要求，將被安排與招聘經理進行面試。 <br>
+            除了符合職位的最低能力要求外，員工申請人還必須符合以下標準：<br>
+            1.  員工申請人必須在現職位服務滿十二(12)個月；<br>
+            2.  員工申請人在最近一次績效評估週期中，必須被評定為 S(滿意) 或以上；<br>
+            3.  正在執行績效改進計畫(PIP)的員工申請人不得申請新職位或轉調。
+        </p>
+    </div>
         
-        <div class="job-card">
-            <div class="card-header">
-                <h2>Software Engineer</h2>
-                <span class="department">IT Division</span>
-            </div>
-            <p class="summary">Responsible for designing, developing, testing and maintaining software applications.</p>
+    <div class="job-card">
+        <div class="card-header">
+            <h2 class="lang-en">Software Engineer</h2>
+            <h2 class="lang-zh">軟體工程師</h2>
+            <span class="department lang-en">IT Division</span>
+            <span class="department lang-zh">資訊技術部門</span>
+        </div>
+        <p class="summary lang-en">Responsible for designing, developing, testing and maintaining software applications.</p>
+        <p class="summary lang-zh">負責設計、開發、測試及維護軟體應用程式。</p>
+        
+        <div class="lang-en">
             <button onclick="toggleInfo('se')">more info</button>
-            <div id="se" class="more-info">
-                <h3>Job Description</h3>
-                <ul>
-                    <li>Develop efficient and reliable code.</li>
-                    <li>Participate in requirements analysis, system design and architecture planning.</li>
-                    <li>Perform unit testing and integration testing to ensure software quality.</li>
-                    <li>Collaborate with cross-departmental teams to solve technical problems.</li>
-                </ul>
-                <h3>Required skills</h3>
-                <p>Proficiency in at least one programming language (e.g., Python, Java, JavaScript), familiarity with version control tools (e.g., Git), and good problem-solving skills are required.</p>
-            </div>
         </div>
+        <div class="lang-zh">
+            <button onclick="toggleInfo('se')">了解更多</button>
+        </div>
+        
+        <div id="se" class="more-info">
+            <h3 class="lang-en">Job Description</h3>
+            <h3 class="lang-zh">工作內容</h3>
+            <ul class="lang-en">
+                <li>Develop efficient and reliable code.</li>
+                <li>Participate in requirements analysis, system design and architecture planning.</li>
+                <li>Perform unit testing and integration testing to ensure software quality.</li>
+                <li>Collaborate with cross-departmental teams to solve technical problems.</li>
+            </ul>
+            <ul class="lang-zh">
+                <li>開發高效、可靠的程式碼。</li>
+                <li>參與需求分析、系統設計與架構規劃。</li>
+                <li>進行單元測試與整合測試，確保軟體品質。</li>
+                <li>與跨部門團隊協作，共同解決技術問題。</li>
+            </ul>
+            <h3 class="lang-en">Required skills</h3>
+            <h3 class="lang-zh">所需技能</h3>
+            <p class="lang-en">Proficiency in at least one programming language (e.g., Python, Java, JavaScript), familiarity with version control tools (e.g., Git), and good problem-solving skills are required.</p>
+            <p class="lang-zh">具備至少一種程式語言（如 Python、Java、JavaScript），熟悉版本控制工具（如 Git），並有良好的問題解決能力。</p>
+        </div>
+    </div>
 
-        <div class="job-card">
-            <div class="card-header">
-                <h2>Project Manager</h2>
-                <span class="department">APAC Division</span>
-            </div>
-            <p class="summary">Responsible for planning, executing and monitoring projects to ensure they are completed on schedule and within budget.</p>
+    <div class="job-card">
+        <div class="card-header">
+            <h2 class="lang-en">Project Manager</h2>
+            <h2 class="lang-zh">專案經理</h2>
+            <span class="department lang-en">APAC Division</span>
+            <span class="department lang-zh">亞太區部門</span>
+        </div>
+        <p class="summary lang-en">Responsible for planning, executing and monitoring projects to ensure they are completed on schedule and within budget.</p>
+        <p class="summary lang-zh">負責規劃、執行與監控專案，確保專案按時程和預算完成。</p>
+        <div class="lang-en">
             <button onclick="toggleInfo('pm')">more info</button>
-            <div id="pm" class="more-info">
-                <h3>Job Description</h3>
-                <ul>
-                    <li>Define project scope, objectives, and deliverables.</li>
-                    <li>Manage project timelines, resources, and risks.</li>
-                    <li>Coordinate internal teams with external stakeholders.</li>
-                    <li>Report project progress to management regularly.</li>
-                </ul>
-                <h3>Required skills</h3>
-                <p>Excellent communication and organizational skills, familiarity with project management methodologies (such as Agile, Scrum), and leadership skills.</p>
-            </div>
         </div>
+        <div class="lang-zh">
+            <button onclick="toggleInfo('pm')">了解更多</button>
+        </div>
+        <div id="pm" class="more-info">
+            <h3 class="lang-en">Job Description</h3>
+            <h3 class="lang-zh">工作內容</h3>
+            <ul class="lang-en">
+                <li>Define project scope, objectives, and deliverables.</li>
+                <li>Manage project timelines, resources, and risks.</li>
+                <li>Coordinate internal teams with external stakeholders.</li>
+                <li>Report project progress to management regularly.</li>
+            </ul>
+            <ul class="lang-zh">
+                <li>定義專案範圍、目標與交付物。</li>
+                <li>管理專案時程、資源與風險。</li>
+                <li>協調內部團隊與外部利害關係人。</li>
+                <li>定期向管理層報告專案進度。</li>
+            </ul>
+            <h3 class="lang-en">Required skills</h3>
+            <h3 class="lang-zh">所需技能</h3>
+            <p class="lang-en">Excellent communication and organizational skills, familiarity with project management methodologies (such as Agile, Scrum), and leadership skills.</p>
+            <p class="lang-zh">出色的溝通與組織能力，熟悉專案管理方法論（如 Agile, Scrum），並具備領導力。</p>
+        </div>
+    </div>
 
-        <div class="job-card">
-            <div class="card-header">
-                <h2>Marketing Specialist</h2>
-                <span class="department">Marketing Division</span>
-            </div>
-            <p class="summary">Responsible for planning and executing marketing activities to enhance brand awareness and product sales.</p>
+    <div class="job-card">
+        <div class="card-header">
+            <h2 class="lang-en">Marketing Specialist</h2>
+            <h2 class="lang-zh">行銷專員</h2>
+            <span class="department lang-en">Marketing Division</span>
+            <span class="department lang-zh">行銷部門</span>
+        </div>
+        <p class="summary lang-en">Responsible for planning and executing marketing activities to enhance brand awareness and product sales.</p>
+        <p class="summary lang-zh">負責規劃與執行行銷活動，提升品牌知名度與產品銷售。</p>
+        <div class="lang-en">
             <button onclick="toggleInfo('ms')">more info</button>
-            <div id="ms" class="more-info">
-                <h3>Job Description</h3>
-                <ul>
-                    <li>Develop marketing strategies and plans.</li>
-                    <li>Manage social media platforms and content distribution.</li>
-                    <li>Analyze market trends and competitors.</li>
-                    <li>Execute online or offline promotional activities.</li>
-                </ul>
-                <h3>Required skills</h3>
-                <p>Possess market analysis skills, familiarity with digital marketing tools (e.g. Google Analytics, SEO), and possess creative and copywriting skills.</p>
-            </div>
         </div>
-
+        <div class="lang-zh">
+            <button onclick="toggleInfo('ms')">了解更多</button>
+        </div>
+        <div id="ms" class="more-info">
+            <h3 class="lang-en">Job Description</h3>
+            <h3 class="lang-zh">工作內容</h3>
+            <ul class="lang-en">
+                <li>Develop marketing strategies and plans.</li>
+                <li>Manage social media platforms and content distribution.</li>
+                <li>Analyze market trends and competitors.</li>
+                <li>Execute online or offline promotional activities.</li>
+            </ul>
+            <ul class="lang-zh">
+                <li>制定行銷策略與計畫。</li>
+                <li>管理社群媒體平台與內容發布。</li>
+                <li>分析市場趨勢與競爭對手。</li>
+                <li>執行線上或線下推廣活動。</li>
+            </ul>
+            <h3 class="lang-en">Required skills</h3>
+            <h3 class="lang-zh">所需技能</h3>
+            <p class="lang-en">Possess market analysis skills, familiarity with digital marketing tools (e.g. Google Analytics, SEO), and possess creative and copywriting skills.</p>
+            <p class="lang-zh">具備市場分析能力，熟悉數位行銷工具（如 Google Analytics, SEO），並有創意與文案寫作能力。</p>
+        </div>
     </div>
 
     <script>
+        function toggleLanguage() {
+            const currentLang = document.documentElement.lang;
+            const newLang = currentLang === 'zh-TW' ? 'en' : 'zh-TW';
+            document.documentElement.lang = newLang;
+            localStorage.setItem('lang', newLang);
+
+            const englishElements = document.querySelectorAll('.lang-en');
+            const chineseElements = document.querySelectorAll('.lang-zh');
+
+            if (newLang === 'zh-TW') {
+                englishElements.forEach(el => el.style.display = 'none');
+                chineseElements.forEach(el => el.style.display = 'block');
+            } else {
+                englishElements.forEach(el => el.style.display = 'block');
+                chineseElements.forEach(el => el.style.display = 'none');
+            }
+        }
+
+        window.onload = function() {
+            const savedLang = localStorage.getItem('lang');
+            if (savedLang) {
+                document.documentElement.lang = savedLang;
+                if (savedLang === 'zh-TW') {
+                    document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                    document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'block');
+                } else {
+                    document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'block');
+                    document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'none');
+                }
+            } else {
+                document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'none');
+            }
+
+            document.getElementById('lang-toggle-btn').addEventListener('click', toggleLanguage);
+        };
+        
         function toggleInfo(id) {
             const element = document.getElementById(id);
             if (element.style.display === "none" || element.style.display === "") {
@@ -195,6 +313,5 @@
             }
         }
     </script>
-
 </body>
 </html>
