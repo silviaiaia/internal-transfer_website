@@ -12,6 +12,11 @@
             padding: 20px;
         }
 
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
         h1 {
             text-align: left;
             color: #000000;
@@ -58,8 +63,15 @@
         }
 
         .job-card h2 {
-            color: #0072E3;
+            color: #8592A2;
             margin: 0;
+        }
+
+        .department {
+            font-weight: bold;
+            color: #8592A2;
+            font-size: 0.9em;
+            white-space: nowrap;
         }
 
         .job-card .summary {
@@ -99,13 +111,6 @@
             background-color: #0056b3;
         }
 
-        .department {
-            font-weight: bold;
-            color: #0072E3;
-            font-size: 0.9em;
-            white-space: nowrap;
-        }
-
         .language-switcher {
             text-align: right;
             padding: 20px 20px 0 0;
@@ -129,12 +134,12 @@
 
         .lang-en { display: block; }
         .lang-zh { display: none; }
-        
     </style>
 </head>
 <body>
     <div class="language-switcher">
-        <button id="lang-toggle-btn">English / 中文</button>
+        <button id="lang-en-btn">English</button>
+        <button id="lang-zh-btn">繁體中文</button>
     </div>
 
     <div class="lang-en">
@@ -148,9 +153,9 @@
         <h2 class="section-title">Requirements</h2>
     </div>
     <div class="lang-zh">
-        <h2 class="section-title">資格</h2>
+        <h2 class="section-title">應徵資格</h2>
     </div>
-        
+
     <div class="lang-en">
         <p class="intro-text">
             If the employee applicant meets the minimum competencies for the position, the employee applicant will be scheduled to interview with the hiring manager. <br>
@@ -169,7 +174,7 @@
             3.  正在執行績效改進計畫(PIP)的員工申請人不得申請新職位或轉調。
         </p>
     </div>
-        
+    
     <div class="job-card">
         <div class="card-header">
             <h2 class="lang-en">Software Engineer</h2>
@@ -302,7 +307,7 @@
         }
 
         window.onload = function() {
-            const savedLang = localStorage.getItem('lang') || 'en'; 
+            const savedLang = localStorage.getItem('lang') || 'en';
             setLanguage(savedLang);
 
             document.getElementById('lang-en-btn').addEventListener('click', () => setLanguage('en'));
