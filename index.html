@@ -111,6 +111,22 @@
             padding: 20px 20px 0 0;
         }
 
+        .language-switcher button {
+            background-color: #DCDDDF;
+            color: #000000;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+
+        .language-switcher button.active {
+            background-color: #0056b3;
+            color: #fff;
+        }
+
         .lang-en { display: block; }
         .lang-zh { display: none; }
         
@@ -148,7 +164,7 @@
         <p class="intro-text">
             如果員工申請人符合該職位的基本能力要求，將被安排與招聘經理進行面試。 <br>
             除了符合職位的最低能力要求外，員工申請人還必須符合以下標準：<br>
-            1.  員工申請人必須在現職位服務滿十二(12)個月；<br>
+            1.  員工申請人必須在現職位服務滿十二個月；<br>
             2.  員工申請人在最近一次績效評估週期中，必須被評定為 S(滿意) 或以上；<br>
             3.  正在執行績效改進計畫(PIP)的員工申請人不得申請新職位或轉調。
         </p>
@@ -268,40 +284,29 @@
     </div>
 
     <script>
-        function toggleLanguage() {
-            const currentLang = document.documentElement.lang;
-            const newLang = currentLang === 'zh-TW' ? 'en' : 'zh-TW';
-            document.documentElement.lang = newLang;
-            localStorage.setItem('lang', newLang);
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            localStorage.setItem('lang', lang);
 
-            const englishElements = document.querySelectorAll('.lang-en');
-            const chineseElements = document.querySelectorAll('.lang-zh');
-
-            if (newLang === 'zh-TW') {
-                englishElements.forEach(el => el.style.display = 'none');
-                chineseElements.forEach(el => el.style.display = 'block');
+            if (lang === 'zh-TW') {
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'block');
+                document.getElementById('lang-zh-btn').classList.add('active');
+                document.getElementById('lang-en-btn').classList.remove('active');
             } else {
-                englishElements.forEach(el => el.style.display = 'block');
-                chineseElements.forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'block');
+                document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'none');
+                document.getElementById('lang-en-btn').classList.add('active');
+                document.getElementById('lang-zh-btn').classList.remove('active');
             }
         }
 
         window.onload = function() {
-            const savedLang = localStorage.getItem('lang');
-            if (savedLang) {
-                document.documentElement.lang = savedLang;
-                if (savedLang === 'zh-TW') {
-                    document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
-                    document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'block');
-                } else {
-                    document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'block');
-                    document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'none');
-                }
-            } else {
-                document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'none');
-            }
+            const savedLang = localStorage.getItem('lang') || 'en'; 
+            setLanguage(savedLang);
 
-            document.getElementById('lang-toggle-btn').addEventListener('click', toggleLanguage);
+            document.getElementById('lang-en-btn').addEventListener('click', () => setLanguage('en'));
+            document.getElementById('lang-zh-btn').addEventListener('click', () => setLanguage('zh-TW'));
         };
         
         function toggleInfo(id) {
