@@ -23,11 +23,20 @@
             margin-bottom: 40px;
         }
 
+        h2 {
+            text-align: left;
+            color: #5B5B5B
+            margin-bottom: 10px;
+            border-bottom: 1px solid;
+            padding-bottom: 10px;
+        }
+
         .intro-text {
             text-align: left;
-            color: #000000;
+            color: #5B5B5B;
             font-size: 1.1em;
             margin-bottom: 40px;
+            line-height: 1.5;
         }
 
         .job-card {
@@ -36,11 +45,14 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
+            position: relative;
         }
 
         .job-card h2 {
-            color: #0077FF;
+            color: #8592A2;
             margin-top: 0;
+            border-bottom: none;
+            padding-bottom: 0;
         }
 
         .job-card .summary {
@@ -66,7 +78,7 @@
         }
 
         .job-card button {
-            background-color: #0077FF;
+            background-color: #DCDDDF;
             color: #000000;
             border: none;
             padding: 10px 15px;
@@ -79,6 +91,16 @@
         .job-card button:hover {
             background-color: #0056b3;
         }
+
+        .department {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-weight: bold;
+            color: #8592A2
+            font-size: 0.9em;
+        }
+        
     </style>
 </head>
 <body>
@@ -86,8 +108,9 @@
     <div class="container">
         <h1>Internal Transfer</h1>
 
+        <h2>Requirements</h2>
+        
         <p class="intro-text">
-          Requirements: <br>
           If the employee applicant meets the minimum competencies for the position, the employee applicant will be scheduled to interview with the hiring manager. <br>
           In addition to meeting the minimum competencies for the position, employee applicant must meet the following criteria: <br>
           1.    The employee applicant must be in the current position for twelve(12) months; <br>
@@ -96,7 +119,7 @@
         </p>
         
         <div class="job-card">
-            <h2>Software Engineer</h2>
+            <span class="department">IT Division</span> <h2>Software Engineer</h2>
             <p class="summary">Responsible for designing, developing, testing and maintaining software applications.</p>
             <button onclick="toggleInfo('se')">more info</button>
             <div id="se" class="more-info">
@@ -113,7 +136,7 @@
         </div>
 
         <div class="job-card">
-            <h2>Project Manager</h2>
+            <span class="department">APAC Division</span> <h2>Project Manager</h2>
             <p class="summary">Responsible for planning, executing and monitoring projects to ensure they are completed on schedule and within budget.</p>
             <button onclick="toggleInfo('pm')">more info</button>
             <div id="pm" class="more-info">
@@ -130,7 +153,7 @@
         </div>
 
         <div class="job-card">
-            <h2>Marketing Specialist</h2>
+            <span class="department">Marketing Division</span> <h2>Marketing Specialist</h2>
             <p class="summary">Responsible for planning and executing marketing activities to enhance brand awareness and product sales.</p>
             <button onclick="toggleInfo('ms')">more info</button>
             <div id="ms" class="more-info">
