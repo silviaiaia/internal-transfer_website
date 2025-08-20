@@ -152,6 +152,27 @@
             text-align: center;
             margin-bottom: 20px;
         }
+
+        .search-and-filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px;
+            align-items: center;
+        }
+
+        .search-and-filter-bar input,
+        .search-and-filter-bar select {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .search-and-filter-bar input {
+            flex: 1;
+            min-width: 200px;
+        }
     </style>
 </head>
 <body>
@@ -192,8 +213,39 @@
             3.  正在執行<span class="highlight">績效改進計畫(PIP)</span>的員工申請人<span class="highlight">不得</span>申請新職位或轉調。
         </p>
     </div>
+
+    <div class="search-and-filter-bar">
+    <div class="lang-en">
+        <input type="text" id="searchInput" placeholder="Search for jobs..." oninput="filterAndSearch()">
+        <select id="departmentFilter" onchange="filterAndSearch()">
+            <option value="all">All Departments</option>
+            <option value="IT Division">IT Division</option>
+            <option value="APAC Division">APAC Division</option>
+            <option value="Marketing Division">Marketing Division</option>
+        </select>
+        <select id="durationFilter" onchange="filterAndSearch()">
+            <option value="all">All Durations</option>
+            <option value="Permanent position">Permanent</option>
+            <option value="Temporary position">Temporary</option>
+        </select>
+    </div>
+    <div class="lang-zh">
+        <input type="text" id="searchInputZh" placeholder="搜尋職位..." oninput="filterAndSearch()">
+        <select id="departmentFilterZh" onchange="filterAndSearch()">
+            <option value="all">所有部門</option>
+            <option value="資訊技術部門">資訊技術部門</option>
+            <option value="亞太區部門">亞太區部門</option>
+            <option value="行銷部門">行銷部門</option>
+        </select>
+        <select id="durationFilterZh" onchange="filterAndSearch()">
+            <option value="all">所有性質</option>
+            <option value="長期職位">長期</option>
+            <option value="短期職位">短期</option>
+        </select>
+    </div>
+    </div>
     
-    <div class="job-card">
+    <div class="job-card" data-department="IT Division" data-duration="Permanent position" data-grade="6 Grade">
         <div class="card-header">
             <h2 class="lang-en">Software Engineer</h2>
             <h2 class="lang-zh">軟體工程師</h2>
@@ -246,7 +298,7 @@
         </div>
     </div>
 
-    <div class="job-card">
+    <div class="job-card" data-department="APAC Division" data-duration="Temporary position" data-grade="10 Grade">
         <div class="card-header">
             <h2 class="lang-en">Project Manager</h2>
             <h2 class="lang-zh">專案經理</h2>
@@ -297,7 +349,7 @@
         </div>
     </div>
 
-    <div class="job-card">
+    <div class="job-card" data-department="Marketing Division" data-duration="Permanent position" data-grade="4 Grade">
         <div class="card-header">
             <h2 class="lang-en">Marketing Specialist</h2>
             <h2 class="lang-zh">行銷專員</h2>
@@ -392,6 +444,34 @@
             } else {
                 element.style.display = "none";
             }
+        }
+
+        function filterAndSearch() {
+            const isEnglish = document.documentElement.lang === 'en';
+            
+            const searchInput = isEnglish ? document.getElementById('searchInput').value.toLowerCase() : document.getElementById('searchInputZh').value.toLowerCase();
+            const departmentFilter = isEnglish ? document.getElementById('departmentFilter').value : document.getElementById('departmentFilterZh').value;
+            const durationFilter = isEnglish ? document.getElementById('durationFilter').value : document.getElementById('durationFilterZh').value;
+
+            const jobCards = document.querySelectorAll('.job-card');
+
+            jobCards.forEach(card => {
+                const department = card.getAttribute('data-department');
+                const duration = card.getAttribute('data-duration');
+                const grade = card.getAttribute('data-grade');
+        
+                const cardText = card.textContent.toLowerCase();
+
+                const matchesSearch = cardText.includes(searchInput);
+                const matchesDepartment = departmentFilter === 'all' || department === departmentFilter;
+                const matchesDuration = durationFilter === 'all' || duration === durationFilter;
+
+                if (matchesSearch && matchesDepartment && matchesDuration) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
