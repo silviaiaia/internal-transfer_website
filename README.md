@@ -4,7 +4,7 @@ This is a prototype for an internal web portal designed to display available job
 
 ## **Important Notice**
 
-<font color=#FF0000>**This project is for internal use only and is not intended for external or public access.**</font>
+**This project is for internal use only and is not intended for external or public access.**
 
 This website is a proof of concept. The content within this web page, including job descriptions and other related information, is for demonstration purposes only and is entirely fictional.
 
