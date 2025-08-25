@@ -265,6 +265,8 @@
         </select>
     </div>
     </div>
+    <div class="lang-en" id="result-count-en" style="padding: 0 20px; font-weight: bold;"></div>
+    <div class="lang-zh" id="result-count-zh" style="padding: 0 20px; font-weight: bold;"></div>
     
     <div class="job-card" data-department="IT Division" data-duration="Permanent position" data-grade="6 Grade">
         <div class="card-header">
@@ -476,6 +478,8 @@
 
             const jobCards = document.querySelectorAll('.job-card');
 
+            let visibleJobs = 0;
+
             jobCards.forEach(card => {
                 const department = card.getAttribute('data-department');
                 const duration = card.getAttribute('data-duration');
@@ -487,12 +491,24 @@
                 const matchesDepartment = departmentFilter === 'all' || department === departmentFilter;
                 const matchesDuration = durationFilter === 'all' || duration === durationFilter;
 
-                if (matchesSearch && matchesDepartment && matchesDuration) {
+                if (matchesSearch && matchesDepartment && matchesDuration && matchesGrade) {
                     card.style.display = 'block';
+                    visibleJobs++; // 每次顯示卡片時，計數器加一
                 } else {
                     card.style.display = 'none';
                 }
             });
+            
+            const resultCountEn = document.getElementById('result-count-en');
+            const resultCountZh = document.getElementById('result-count-zh');
+    
+            if (isEnglish) {
+                resultCountEn.textContent = `${visibleJobs} job(s) found.`;
+                resultCountZh.textContent = '';
+            } else {
+                resultCountZh.textContent = `找到 ${visibleJobs} 個職位。`;
+                resultCountEn.textContent = '';
+            }
         }
     </script>
 </body>
