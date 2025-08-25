@@ -345,6 +345,13 @@
         <div class="lang-zh">
             <button onclick="toggleInfo('se')">了解更多</button>
         </div>
+
+        <div class="lang-en">
+            <button class="toggle-btn" data-target="se" data-state="more">more info</button>
+        </div>
+        <div class="lang-zh">
+            <button class="toggle-btn" data-target="se" data-state="more">了解更多</button>
+        </div>
         
         <div id="se" class="more-info">
             <h3 class="lang-en">Job Description</h3>
@@ -391,12 +398,21 @@
             <span class="highlight">職等：10職等</span><br>
             負責規劃、執行與監控專案，確保專案按時程和預算完成。
         </p>
+        
         <div class="lang-en">
-            <button onclick="toggleInfo('pm')">more info</button>
+            <button onclick="toggleInfo('se')">more info</button>
         </div>
         <div class="lang-zh">
-            <button onclick="toggleInfo('pm')">了解更多</button>
+            <button onclick="toggleInfo('se')">了解更多</button>
         </div>
+
+        <div class="lang-en">
+            <button class="toggle-btn" data-target="se" data-state="more">more info</button>
+        </div>
+        <div class="lang-zh">
+            <button class="toggle-btn" data-target="se" data-state="more">了解更多</button>
+        </div>
+        
         <div id="pm" class="more-info">
             <h3 class="lang-en">Job Description</h3>
             <h3 class="lang-zh">工作內容</h3>
@@ -442,12 +458,21 @@
             <span class="highlight">職等：4職等</span><br>
             負責規劃與執行行銷活動，提升品牌知名度與產品銷售。
         </p>
+        
         <div class="lang-en">
-            <button onclick="toggleInfo('ms')">more info</button>
+            <button onclick="toggleInfo('se')">more info</button>
         </div>
         <div class="lang-zh">
-            <button onclick="toggleInfo('ms')">了解更多</button>
+            <button onclick="toggleInfo('se')">了解更多</button>
         </div>
+
+        <div class="lang-en">
+            <button class="toggle-btn" data-target="se" data-state="more">more info</button>
+        </div>
+        <div class="lang-zh">
+            <button class="toggle-btn" data-target="se" data-state="more">了解更多</button>
+        </div>
+        
         <div id="ms" class="more-info">
             <h3 class="lang-en">Job Description</h3>
             <h3 class="lang-zh">工作內容</h3>
@@ -531,12 +556,28 @@
             filterAndSearch();
         };
         
-        function toggleInfo(id) {
+        function toggleInfo(button, id) {
             const element = document.getElementById(id);
-            if (element.style.display === "none" || element.style.display === "") {
+            const isMoreInfo = button.getAttribute('data-state') === 'more';
+    
+            if (isMoreInfo) {
                 element.style.display = "block";
+                button.setAttribute('data-state', 'less');
+                
+            if (document.documentElement.lang === 'en') {
+                button.textContent = "less info";
+            } else {
+                button.textContent = "收合資訊";
+            }
             } else {
                 element.style.display = "none";
+                button.setAttribute('data-state', 'more');
+        
+            if (document.documentElement.lang === 'en') {
+                button.textContent = "more info";
+            } else {
+                button.textContent = "了解更多";
+                }
             }
         }
         
