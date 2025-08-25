@@ -317,15 +317,11 @@
             </select>
         </div>
     </div>
-    
-    <div class="lang-en result-count" id="result-count-en"></div>
-    <div class="lang-zh result-count" id="result-count-zh"></div>
 
     ...
     <div class="lang-en result-count" id="result-count-en"></div>
     <div class="lang-zh result-count" id="result-count-zh"></div>
-    
-        
+     
     <div id="job-listings"></div>
     ...
 
@@ -413,7 +409,7 @@
                     <div class="lang-zh">
                         <button onclick="toggleInfo('${job.id}')">了解更多</button>
                     </div>
-                    <div id="${job.id}" class="more-info">
+                    <div id="${job.id}" class="more-info" style="display:none;">
                         <h3 class="lang-en">Job Description</h3>
                         <h3 class="lang-zh">工作內容</h3>
                         <ul class="lang-en">${descriptionHtml_en}</ul>
