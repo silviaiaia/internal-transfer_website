@@ -1,4 +1,3 @@
-<script>
         function setLanguage(lang) {
             document.documentElement.lang = lang;
             localStorage.setItem('lang', lang);
@@ -92,4 +91,3 @@
                 resultCountEn.textContent = '';
             }
         }
-    </script>
