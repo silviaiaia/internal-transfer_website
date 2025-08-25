@@ -268,19 +268,19 @@
 
     <div class="search-and-filter-bar">
         <div class="lang-en">
-            <input type="text" id="searchInput" placeholder="Search for jobs..." oninput="filterAndSearch()">
-            <select id="departmentFilter" onchange="filterAndSearch()">
+            <input type="text" id="searchInput" placeholder="Search for jobs...">
+            <select id="departmentFilter">
                 <option value="all">All Departments</option>
                 <option value="IT Division">IT Division</option>
                 <option value="APAC Division">APAC Division</option>
                 <option value="Marketing Division">Marketing Division</option>
             </select>
-            <select id="durationFilter" onchange="filterAndSearch()">
+            <select id="durationFilter">
                 <option value="all">All Durations</option>
                 <option value="Permanent position">Permanent</option>
                 <option value="Temporary position">Temporary</option>
             </select>
-            <select id="gradeFilter" onchange="filterAndSearch()">
+            <select id="gradeFilter">
                 <option value="all">All Grades</option>
                 <option value="4 Grade">4 Grade</option>
                 <option value="6 Grade">6 Grade</option>
@@ -288,19 +288,19 @@
             </select>
         </div>
         <div class="lang-zh">
-            <input type="text" id="searchInputZh" placeholder="搜尋職位..." oninput="filterAndSearch()">
-            <select id="departmentFilterZh" onchange="filterAndSearch()">
+            <input type="text" id="searchInputZh" placeholder="搜尋職位...">
+            <select id="departmentFilterZh">
                 <option value="all">所有部門</option>
                 <option value="IT Division">資訊技術部門</option>
                 <option value="APAC Division">亞太區部門</option>
                 <option value="Marketing Division">行銷部門</option>
             </select>
-            <select id="durationFilterZh" onchange="filterAndSearch()">
+            <select id="durationFilterZh">
                 <option value="all">所有性質</option>
                 <option value="Permanent position">長期</option>
                 <option value="Temporary position">短期</option>
             </select>
-            <select id="gradeFilterZh" onchange="filterAndSearch()">
+            <select id="gradeFilterZh">
                 <option value="all">所有職等</option>
                 <option value="4 Grade">4 職等</option>
                 <option value="6 Grade">6 職等</option>
@@ -331,10 +331,10 @@
         </p>
         
         <div class="lang-en">
-            <button onclick="toggleInfo('se')">more info</button>
+            <button class="toggle-btn" data-target="se">more info</button>
         </div>
         <div class="lang-zh">
-            <button onclick="toggleInfo('se')">了解更多</button>
+            <button class="toggle-btn" data-target="se">了解更多</button>
         </div>
         
         <div id="se" class="more-info">
@@ -383,10 +383,10 @@
             負責規劃、執行與監控專案，確保專案按時程和預算完成。
         </p>
         <div class="lang-en">
-            <button onclick="toggleInfo('pm')">more info</button>
+            <button class="toggle-btn" data-target="se">more info</button>
         </div>
         <div class="lang-zh">
-            <button onclick="toggleInfo('pm')">了解更多</button>
+            <button class="toggle-btn" data-target="se">了解更多</button>
         </div>
         <div id="pm" class="more-info">
             <h3 class="lang-en">Job Description</h3>
@@ -434,10 +434,10 @@
             負責規劃與執行行銷活動，提升品牌知名度與產品銷售。
         </p>
         <div class="lang-en">
-            <button onclick="toggleInfo('ms')">more info</button>
+            <button class="toggle-btn" data-target="se">more info</button>
         </div>
         <div class="lang-zh">
-            <button onclick="toggleInfo('ms')">了解更多</button>
+            <button class="toggle-btn" data-target="se">了解更多</button>
         </div>
         <div id="ms" class="more-info">
             <h3 class="lang-en">Job Description</h3>
