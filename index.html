@@ -192,6 +192,38 @@
             flex: 1;
             min-width: 200px;
         }
+
+        /* Additions from previous response */
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            background-color: #007AB5;
+            color: white;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease-in-out;
+        }
+        #scrollToTopBtn:hover {
+            background-color: #005688;
+        }
+        .result-count {
+            padding: 0 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            .result-count {
+                padding: 0 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -219,9 +251,9 @@
         <p class="intro-text">
             If the employee applicant meets the <span class="highlight">minimum competencies</span> for the position, the employee applicant will be scheduled to interview with the hiring manager. <br>
             In addition to meeting the minimum competencies for the position, employee applicant must meet the following criteria : <br>
-            1.   The employee applicant must be in the current position for <span class="highlight">12 months</span>. <br>
-            2.   The employee applicant must be rated as <span class="highlight">S(Satisfactory)</span> or above in the latest performance rating cycle. <br>
-            3.   An employee applicant on a <span class="highlight">Performance Improvement Plan(PIP)</span> may <span class="highlight">not</span> apply for a new position or transfer.
+            1.  The employee applicant must be in the current position for <span class="highlight">12 months</span>. <br>
+            2.  The employee applicant must be rated as <span class="highlight">S(Satisfactory)</span> or above in the latest performance rating cycle. <br>
+            3.  An employee applicant on a <span class="highlight">Performance Improvement Plan(PIP)</span> may <span class="highlight">not</span> apply for a new position or transfer.
         </p>
     </div>
     <div class="lang-zh">
@@ -249,6 +281,12 @@
             <option value="Permanent position">Permanent</option>
             <option value="Temporary position">Temporary</option>
         </select>
+        <select id="gradeFilter" onchange="filterAndSearch()">
+            <option value="all">All Grades</option>
+            <option value="4 Grade">4 Grade</option>
+            <option value="6 Grade">6 Grade</option>
+            <option value="10 Grade">10 Grade</option>
+        </select>
     </div>
     <div class="lang-zh">
         <input type="text" id="searchInputZh" placeholder="搜尋職位..." oninput="filterAndSearch()">
@@ -263,8 +301,16 @@
             <option value="Permanent position">長期</option>
             <option value="Temporary position">短期</option>
         </select>
+        <select id="gradeFilterZh" onchange="filterAndSearch()">
+            <option value="all">所有職等</option>
+            <option value="4 Grade">4 職等</option>
+            <option value="6 Grade">6 職等</option>
+            <option value="10 Grade">10 職等</option>
+        </select>
     </div>
     </div>
+    <div class="lang-en result-count" id="result-count-en"></div>
+    <div class="lang-zh result-count" id="result-count-zh"></div>
     
     <div class="job-card" data-department="IT Division" data-duration="Permanent position" data-grade="6 Grade">
         <div class="card-header">
@@ -432,6 +478,8 @@
         <iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=NVi7uIB-zEuXaN8PQviID9ahXQ2Y9QZDiPDefAVXMrRUOVNKR0JIWkM2S0dISVgwVEcwWTM2OU9CQS4u&embed=true&lang=en" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
     </div>
 
+    <button id="scrollToTopBtn" title="Go to top">▲</button>
+
     <script>
         function setLanguage(lang) {
             document.documentElement.lang = lang;
@@ -456,6 +504,8 @@
 
             document.getElementById('lang-en-btn').addEventListener('click', () => setLanguage('en'));
             document.getElementById('lang-zh-btn').addEventListener('click', () => setLanguage('zh-TW'));
+            
+            filterAndSearch();
         };
         
         function toggleInfo(id) {
@@ -466,6 +516,22 @@
                 element.style.display = "none";
             }
         }
+        
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        window.onscroll = function() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        };
+
+        scrollToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
 
         function filterAndSearch() {
             const isEnglish = document.documentElement.lang === 'en';
@@ -473,26 +539,42 @@
             const searchInput = isEnglish ? document.getElementById('searchInput').value.toLowerCase() : document.getElementById('searchInputZh').value.toLowerCase();
             const departmentFilter = isEnglish ? document.getElementById('departmentFilter').value : document.getElementById('departmentFilterZh').value;
             const durationFilter = isEnglish ? document.getElementById('durationFilter').value : document.getElementById('durationFilterZh').value;
+            const gradeFilter = isEnglish ? document.getElementById('gradeFilter').value : document.getElementById('gradeFilterZh').value;
 
             const jobCards = document.querySelectorAll('.job-card');
+
+            let visibleJobs = 0;
 
             jobCards.forEach(card => {
                 const department = card.getAttribute('data-department');
                 const duration = card.getAttribute('data-duration');
                 const grade = card.getAttribute('data-grade');
-        
+                
                 const cardText = card.textContent.toLowerCase();
 
                 const matchesSearch = cardText.includes(searchInput);
                 const matchesDepartment = departmentFilter === 'all' || department === departmentFilter;
                 const matchesDuration = durationFilter === 'all' || duration === durationFilter;
+                const matchesGrade = gradeFilter === 'all' || grade === gradeFilter;
 
-                if (matchesSearch && matchesDepartment && matchesDuration) {
+                if (matchesSearch && matchesDepartment && matchesDuration && matchesGrade) {
                     card.style.display = 'block';
+                    visibleJobs++;
                 } else {
                     card.style.display = 'none';
                 }
             });
+
+            const resultCountEn = document.getElementById('result-count-en');
+            const resultCountZh = document.getElementById('result-count-zh');
+            
+            if (isEnglish) {
+                resultCountEn.textContent = `${visibleJobs} job(s) found.`;
+                resultCountZh.textContent = '';
+            } else {
+                resultCountZh.textContent = `找到 ${visibleJobs} 個職位。`;
+                resultCountEn.textContent = '';
+            }
         }
     </script>
 </body>
