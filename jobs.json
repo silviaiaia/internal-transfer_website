@@ -1,0 +1,95 @@
+[
+  {
+    "id": "se",
+    "title_en": "Software Engineer",
+    "title_zh": "軟體工程師",
+    "department_en": "IT Division",
+    "department_zh": "資訊技術部門",
+    "department_data": "IT Division",
+    "duration_en": "Permanent position",
+    "duration_zh": "長期職位",
+    "duration_data": "Permanent position",
+    "grade_en": "6 Grade",
+    "grade_zh": "6職等",
+    "grade_data": "6 Grade",
+    "summary_en": "Responsible for designing, developing, testing and maintaining software applications.",
+    "summary_zh": "負責設計、開發、測試及維護軟體應用程式。",
+    "description_en": [
+      "Develop efficient and reliable code.",
+      "Participate in requirements analysis, system design and architecture planning.",
+      "Perform unit testing and integration testing to ensure software quality.",
+      "Collaborate with cross-departmental teams to solve technical problems."
+    ],
+    "description_zh": [
+      "開發高效、可靠的程式碼。",
+      "參與需求分析、系統設計與架構規劃。",
+      "進行單元測試與整合測試，確保軟體品質。",
+      "與跨部門團隊協作，共同解決技術問題。"
+    ],
+    "skills_en": "Proficiency in at least one programming language (e.g., Python, Java, JavaScript), familiarity with version control tools (e.g., Git), and good problem-solving skills are required.",
+    "skills_zh": "具備至少一種程式語言（如 Python、Java、JavaScript），熟悉版本控制工具（如 Git），並有良好的問題解決能力。",
+    "hiring_manager": "Roger Federer"
+  },
+  {
+    "id": "pm",
+    "title_en": "Project Manager",
+    "title_zh": "專案經理",
+    "department_en": "APAC Division",
+    "department_zh": "亞太區部門",
+    "department_data": "APAC Division",
+    "duration_en": "Temporary position / 6 months",
+    "duration_zh": "短期職位 / 6個月",
+    "duration_data": "Temporary position",
+    "grade_en": "10 Grade",
+    "grade_zh": "10職等",
+    "grade_data": "10 Grade",
+    "summary_en": "Responsible for planning, executing and monitoring projects to ensure they are completed on schedule and within budget.",
+    "summary_zh": "負責規劃、執行與監控專案，確保專案按時程和預算完成。",
+    "description_en": [
+      "Define project scope, objectives, and deliverables.",
+      "Manage project timelines, resources, and risks.",
+      "Coordinate internal teams with external stakeholders.",
+      "Report project progress to management regularly."
+    ],
+    "description_zh": [
+      "定義專案範圍、目標與交付物。",
+      "管理專案時程、資源與風險。",
+      "協調內部團隊與外部利害關係人。",
+      "定期向管理層報告專案進度。"
+    ],
+    "skills_en": "Excellent communication and organizational skills, familiarity with project management methodologies (such as Agile, Scrum), and leadership skills.",
+    "skills_zh": "出色的溝通與組織能力，熟悉專案管理方法論（如 Agile, Scrum），並具備領導力。",
+    "hiring_manager": "Rafal Nadal"
+  },
+  {
+    "id": "ms",
+    "title_en": "Marketing Specialist",
+    "title_zh": "行銷專員",
+    "department_en": "Marketing Division",
+    "department_zh": "行銷部門",
+    "department_data": "Marketing Division",
+    "duration_en": "Permanent position",
+    "duration_zh": "長期職位",
+    "duration_data": "Permanent position",
+    "grade_en": "4 Grade",
+    "grade_zh": "4職等",
+    "grade_data": "4 Grade",
+    "summary_en": "Responsible for planning and executing marketing activities to enhance brand awareness and product sales.",
+    "summary_zh": "負責規劃與執行行銷活動，提升品牌知名度與產品銷售。",
+    "description_en": [
+      "Develop marketing strategies and plans.",
+      "Manage social media platforms and content distribution.",
+      "Analyze market trends and competitors.",
+      "Execute online or offline promotional activities."
+    ],
+    "description_zh": [
+      "制定行銷策略與計畫。",
+      "管理社群媒體平台與內容發布。",
+      "分析市場趨勢與競爭對手。",
+      "執行線上或線下推廣活動。"
+    ],
+    "skills_en": "Possess market analysis skills, familiarity with digital marketing tools (e.g. Google Analytics, SEO), and possess creative and copywriting skills.",
+    "skills_zh": "具備市場分析能力，熟悉數位行銷工具（如 Google Analytics, SEO），並有創意與文案寫作能力。",
+    "hiring_manager": "Jannic Sinner"
+  }
+]
