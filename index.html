@@ -268,19 +268,19 @@
 
     <div class="search-and-filter-bar">
         <div class="lang-en">
-            <input type="text" id="searchInput" placeholder="Search for jobs...">
-            <select id="departmentFilter">
+            <input type="text" id="searchInput" placeholder="Search for jobs..." oninput="filterAndSearch()">
+            <select id="departmentFilter" onchange="filterAndSearch()">
                 <option value="all">All Departments</option>
                 <option value="IT Division">IT Division</option>
                 <option value="APAC Division">APAC Division</option>
                 <option value="Marketing Division">Marketing Division</option>
             </select>
-            <select id="durationFilter">
+            <select id="durationFilter" onchange="filterAndSearch()">
                 <option value="all">All Durations</option>
                 <option value="Permanent position">Permanent</option>
                 <option value="Temporary position">Temporary</option>
             </select>
-            <select id="gradeFilter">
+            <select id="gradeFilter" onchange="filterAndSearch()">
                 <option value="all">All Grades</option>
                 <option value="4 Grade">4 Grade</option>
                 <option value="6 Grade">6 Grade</option>
@@ -288,19 +288,19 @@
             </select>
         </div>
         <div class="lang-zh">
-            <input type="text" id="searchInputZh" placeholder="搜尋職位...">
-            <select id="departmentFilterZh">
+            <input type="text" id="searchInputZh" placeholder="搜尋職位..." oninput="filterAndSearch()">
+            <select id="departmentFilterZh" onchange="filterAndSearch()">
                 <option value="all">所有部門</option>
                 <option value="IT Division">資訊技術部門</option>
                 <option value="APAC Division">亞太區部門</option>
                 <option value="Marketing Division">行銷部門</option>
             </select>
-            <select id="durationFilterZh">
+            <select id="durationFilterZh" onchange="filterAndSearch()">
                 <option value="all">所有性質</option>
                 <option value="Permanent position">長期</option>
                 <option value="Temporary position">短期</option>
             </select>
-            <select id="gradeFilterZh">
+            <select id="gradeFilterZh" onchange="filterAndSearch()">
                 <option value="all">所有職等</option>
                 <option value="4 Grade">4 職等</option>
                 <option value="6 Grade">6 職等</option>
@@ -331,10 +331,10 @@
         </p>
         
         <div class="lang-en">
-            <button class="toggle-btn" data-target="se">more info</button>
+            <button onclick="toggleInfo('se')">more info</button>
         </div>
         <div class="lang-zh">
-            <button class="toggle-btn" data-target="se">了解更多</button>
+            <button onclick="toggleInfo('se')">了解更多</button>
         </div>
         
         <div id="se" class="more-info">
@@ -383,10 +383,10 @@
             負責規劃、執行與監控專案，確保專案按時程和預算完成。
         </p>
         <div class="lang-en">
-            <button class="toggle-btn" data-target="se">more info</button>
+            <button onclick="toggleInfo('pm')">more info</button>
         </div>
         <div class="lang-zh">
-            <button class="toggle-btn" data-target="se">了解更多</button>
+            <button onclick="toggleInfo('pm')">了解更多</button>
         </div>
         <div id="pm" class="more-info">
             <h3 class="lang-en">Job Description</h3>
@@ -434,10 +434,10 @@
             負責規劃與執行行銷活動，提升品牌知名度與產品銷售。
         </p>
         <div class="lang-en">
-            <button class="toggle-btn" data-target="se">more info</button>
+            <button onclick="toggleInfo('ms')">more info</button>
         </div>
         <div class="lang-zh">
-            <button class="toggle-btn" data-target="se">了解更多</button>
+            <button onclick="toggleInfo('ms')">了解更多</button>
         </div>
         <div id="ms" class="more-info">
             <h3 class="lang-en">Job Description</h3>
@@ -476,8 +476,106 @@
         </div>
         
         <iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=NVi7uIB-zEuXaN8PQviID9ahXQ2Y9QZDiPDefAVXMrRUOVNKR0JIWkM2S0dISVgwVEcwWTM2OU9CQS4u&embed=true&lang=en" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
-    </div> <button id="scrollToTopBtn" title="Go to top">▲</button>
-    
-    <script src="script.js"></script>
+    </div> // forms-section
+
+    <button id="scrollToTopBtn" title="Go to top">▲</button>
+
+    <script>
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            localStorage.setItem('lang', lang);
+
+            if (lang === 'zh-TW') {
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'block');
+                document.getElementById('lang-zh-btn').classList.add('active');
+                document.getElementById('lang-en-btn').classList.remove('active');
+            } else {
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'block');
+                document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'none');
+                document.getElementById('lang-en-btn').classList.add('active');
+                document.getElementById('lang-zh-btn').classList.remove('active');
+            }
+        }
+
+        window.onload = function() {
+            const savedLang = localStorage.getItem('lang') || 'en';
+            setLanguage(savedLang);
+
+            document.getElementById('lang-en-btn').addEventListener('click', () => setLanguage('en'));
+            document.getElementById('lang-zh-btn').addEventListener('click', () => setLanguage('zh-TW'));
+            
+            filterAndSearch();
+        };
+        
+        function toggleInfo(id) {
+            const element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+        
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        window.onscroll = function() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        };
+
+        scrollToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        function filterAndSearch() {
+            const isEnglish = document.documentElement.lang === 'en';
+            
+            const searchInput = isEnglish ? document.getElementById('searchInput').value.toLowerCase() : document.getElementById('searchInputZh').value.toLowerCase();
+            const departmentFilter = isEnglish ? document.getElementById('departmentFilter').value : document.getElementById('departmentFilterZh').value;
+            const durationFilter = isEnglish ? document.getElementById('durationFilter').value : document.getElementById('durationFilterZh').value;
+            const gradeFilter = isEnglish ? document.getElementById('gradeFilter').value : document.getElementById('gradeFilterZh').value;
+
+            const jobCards = document.querySelectorAll('.job-card');
+
+            let visibleJobs = 0;
+
+            jobCards.forEach(card => {
+                const department = card.getAttribute('data-department');
+                const duration = card.getAttribute('data-duration');
+                const grade = card.getAttribute('data-grade');
+                
+                const cardText = card.textContent.toLowerCase();
+
+                const matchesSearch = cardText.includes(searchInput);
+                const matchesDepartment = departmentFilter === 'all' || department === departmentFilter;
+                const matchesDuration = durationFilter === 'all' || duration === durationFilter;
+                const matchesGrade = gradeFilter === 'all' || grade === gradeFilter;
+
+                if (matchesSearch && matchesDepartment && matchesDuration && matchesGrade) {
+                    card.style.display = 'block';
+                    visibleJobs++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            const resultCountEn = document.getElementById('result-count-en');
+            const resultCountZh = document.getElementById('result-count-zh');
+            
+            if (isEnglish) {
+                resultCountEn.textContent = `${visibleJobs} job(s) found.`;
+                resultCountZh.textContent = '';
+            } else {
+                resultCountZh.textContent = `找到 ${visibleJobs} 個職位。`;
+                resultCountEn.textContent = '';
+            }
+        }
+    </script>
 </body>
 </html>
