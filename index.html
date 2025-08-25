@@ -1,401 +1,409 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internal Transfer</title>
-    <style>
-        body {
-            font-family: Microsoft JhengHei;
-            background-color: #F9F9FC;
-            margin: 0;
-            padding: 20px;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal Transfer</title>
+    <style>
+        body {
+            font-family: Microsoft JhengHei;
+            background-color: #F9F9FC;
+            margin: 0;
+            padding: 20px;
+        }
 
-        .container {
-            max-width: 900px;
-            margin: auto;
-        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
 
-        h1 {
-            text-align: center;
-            color: #000000;
-            margin-bottom: 20px;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
+        h1 {
+            text-align: center;
+            color: #000000;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
 
-        .intro-section {
-            padding: 20px;
-            margin-top: 40px;
-            margin-bottom: 40px;
-            text-align: left;
-            background-color: #F1F4F9;
-        }
-        
-        .section-title {
-            text-align: left;
-            color: #5B5B5B;
-            margin-top: 0;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #5B5B5B;
-            padding-bottom: 10px;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-        
-        .intro-text {
-            color: #5B5B5B;
-            font-size: 1.0em;
-            margin-bottom: 0;
-            line-height: 1.6;
-            padding-left: 0;
-            padding-right: 0;
-        }
+        .intro-section {
+            padding: 20px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            text-align: left;
+            background-color: #F1F4F9;
+        }
+        
+        .section-title {
+            text-align: left;
+            color: #5B5B5B;
+            margin-top: 0;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #5B5B5B;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        
+        .intro-text {
+            color: #5B5B5B;
+            font-size: 1.0em;
+            margin-bottom: 0;
+            line-height: 1.6;
+            padding-left: 0;
+            padding-right: 0;
+        }
 
-        .highlight {
-            color: #007AB5;
-            font-weight: bold;
-        }
+        .highlight {
+            color: #007AB5;
+            font-weight: bold;
+        }
 
-        .job-card {
-            background-color: #fff;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-            border: 1px solid #E9ECEF;
-            margin-bottom: 20px;
-            margin-left: 20px;
-            margin-right: 20px;
-        }
+        .job-card {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            border: 1px solid #E9ECEF;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
 
-        .job-card h2 {
-            color: #007AB5;
-            margin: 0;
-        }
+        .job-card h2 {
+            color: #007AB5;
+            margin: 0;
+        }
 
-        .department {
-            font-weight: bold;
-            color: #007AB5;
-            font-size: 1.1em;
-            white-space: nowrap;
-        }
+        .department {
+            font-weight: bold;
+            color: #007AB5;
+            font-size: 1.1em;
+            white-space: nowrap;
+        }
 
-        .job-card .summary {
-            color: #000000;
-            line-height: 1.8;
-            font-size: 1em;
-        }
+        .job-card .summary {
+            color: #000000;
+            line-height: 1.8;
+            font-size: 1em;
+        }
 
-        .job-card .more-info {
-            display: none;
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px dashed #5B5B5B;
-        }
+        .job-card .more-info {
+            display: none;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px dashed #5B5B5B;
+        }
 
-        .job-card .more-info h3 {
-            margin-top: 0;
-            color: #000000;
-        }
+        .job-card .more-info h3 {
+            margin-top: 0;
+            color: #000000;
+        }
 
-        .job-card ul {
-            padding-left: 20px;
-            margin-bottom: 10px;
-        }
+        .job-card ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
 
-        .job-card button {
-            background-color: #DCDDDF;
-            color: #000000;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
+        .job-card button {
+            background-color: #DCDDDF;
+            color: #000000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
 
-        .job-card button:hover {
-            background-color: #007AB5;
-        }
+        .job-card button:hover {
+            background-color: #007AB5;
+        }
 
-        .language-switcher {
-            text-align: right;
-            padding: 20px 20px 0 0;
-        }
+        .language-switcher {
+            text-align: right;
+            padding: 20px 20px 0 0;
+        }
 
-        .language-switcher button {
-            background-color: #DCDDDF;
-            color: #000000;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-left: 5px;
-        }
+        .language-switcher button {
+            background-color: #DCDDDF;
+            color: #000000;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 5px;
+        }
 
-        .language-switcher button.active {
-            background-color: #007AB5;
-            color: #fff;
-        }
+        .language-switcher button.active {
+            background-color: #007AB5;
+            color: #fff;
+        }
 
-        .lang-en { display: block; }
-        .lang-zh { display: none; }
+        .lang-en { display: block; }
+        .lang-zh { display: none; }
 
-        .forms-section {
-            padding: 20px;
-            margin-top: 40px;
-            text-align: center;
-            background-color: #D1E9E9;
-        }
-        
-        .forms-section h2 {
-            color: #000000;
-            border-bottom: none;
-            text-align: center;
-            margin-bottom: 0;
-        }
+        .forms-section {
+            padding: 20px;
+            margin-top: 40px;
+            text-align: center;
+            background-color: #D1E9E9;
+        }
+        
+        .forms-section h2 {
+            color: #000000;
+            border-bottom: none;
+            text-align: center;
+            margin-bottom: 0;
+        }
 
-        .forms-section .links {
-            color: #000000;
-            line-height: 1.6;
-            border-bottom: none;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 0.9em;
-        }
+        .forms-section .links {
+            color: #000000;
+            line-height: 1.6;
+            border-bottom: none;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
 
-        .search-and-filter-bar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px;
-            align-items: center;
-        }
+        .search-and-filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px;
+            align-items: center;
+        }
 
-        .search-and-filter-bar input,
-        .search-and-filter-bar select {
-            padding: 8px 12px;
-            border: 1px solid;
-            border-radius: 5px;
-            font-size: 1em;
-            transition: all 0.3s ease;
-        }
+        .search-and-filter-bar input,
+        .search-and-filter-bar select {
+            padding: 8px 12px;
+            border: 1px solid;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
 
-        .search-and-filter-bar input:focus,
-        .search-and-filter-bar select:focus {
-            outline: none;
-            border-color: #007AB5;
-            box-shadow: 0 0 5px rgba(0, 122, 181, 0.5);
-        }
+        .search-and-filter-bar input:focus,
+        .search-and-filter-bar select:focus {
+            outline: none;
+            border-color: #007AB5;
+            box-shadow: 0 0 5px rgba(0, 122, 181, 0.5);
+        }
 
-        .search-and-filter-bar input {
-            flex: 1;
-            min-width: 200px;
-        }
+        .search-and-filter-bar input {
+            flex: 1;
+            min-width: 200px;
+        }
 
-        #scrollToTopBtn {
-            display: none;
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 99;
-            font-size: 18px;
-            border: none;
-            outline: none;
-            background-color: #007AB5;
-            color: white;
-            cursor: pointer;
-            padding: 10px 15px;
-            border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: all 0.3s ease-in-out;
-        }
-        #scrollToTopBtn:hover {
-            background-color: #1B2D56;
-        }
-        .result-count {
-            padding: 0 20px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-        @media (max-width: 768px) {
-            .result-count {
-                padding: 0 10px;
-            }
-        }
-    </style>
+        #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            font-size: 18px;
+            border: none;
+            outline: none;
+            background-color: #007AB5;
+            color: white;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease-in-out;
+        }
+        #scrollToTopBtn:hover {
+            background-color: #1B2D56;
+        }
+        .result-count {
+            padding: 0 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 768px) {
+            .result-count {
+                padding: 0 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="language-switcher">
-        <button id="lang-en-btn">English</button>
-        <button id="lang-zh-btn">繁體中文</button>
-    </div>
+    <div class="language-switcher">
+        <button id="lang-en-btn">English</button>
+        <button id="lang-zh-btn">繁體中文</button>
+    </div>
 
-    <div class="lang-en">
-        <h1>Internal Transfer</h1>
-    </div>
-    <div class="lang-zh">
-        <h1>內部轉調</h1>
-    </div>
+    <div class="lang-en">
+        <h1>Internal Transfer</h1>
+    </div>
+    <div class="lang-zh">
+        <h1>內部轉調</h1>
+    </div>
 
-    <div class="intro-section">
-        <div class="lang-en">
-            <h2 class="section-title">Requirements</h2>
-        </div>
-        <div class="lang-zh">
-            <h2 class="section-title">應徵資格</h2>
-        </div>
+    <div class="intro-section">
+        <div class="lang-en">
+            <h2 class="section-title">Requirements</h2>
+        </div>
+        <div class="lang-zh">
+            <h2 class="section-title">應徵資格</h2>
+        </div>
 
-        <div class="lang-en">
-            <p class="intro-text">
-                If the employee applicant meets the <span class="highlight">minimum competencies</span> for the position, the employee applicant will be scheduled to interview with the hiring manager. <br>
-                In addition to meeting the minimum competencies for the position, employee applicant must meet the following criteria : <br>
-                1.  The employee applicant must be in the current position for <span class="highlight">12 months</span>. <br>
-                2.  The employee applicant must be rated as <span class="highlight">S(Satisfactory)</span> or above in the latest performance rating cycle. <br>
-                3.  An employee applicant on a <span class="highlight">Performance Improvement Plan(PIP)</span> may <span class="highlight">not</span> apply for a new position or transfer.
-            </p>
-        </div>
-        <div class="lang-zh">
-            <p class="intro-text">
-                如果員工申請人符合該職位的<span class="highlight">基本能力要求</span>，將被安排與招聘經理進行面試。
-                除了符合職位的基本能力要求外，員工申請人還必須符合以下標準：<br>
-                1.  員工申請人必須在現職位服務滿<span class="highlight">十二個月</span>。<br>
-                2.  員工申請人在最近一次績效評估週期中，必須被評定為 <span class="highlight">S(滿意)</span> 或以上。<br>
-                3.  正在執行<span class="highlight">績效改進計畫(PIP)</span>的員工申請人<span class="highlight">不得</span>申請新職位或轉調。
-            </p>
-        </div>
-    </div>
+        <div class="lang-en">
+            <p class="intro-text">
+                If the employee applicant meets the <span class="highlight">minimum competencies</span> for the position, the employee applicant will be scheduled to interview with the hiring manager. <br>
+                In addition to meeting the minimum competencies for the position, employee applicant must meet the following criteria : <br>
+                1.  The employee applicant must be in the current position for <span class="highlight">12 months</span>. <br>
+                2.  The employee applicant must be rated as <span class="highlight">S(Satisfactory)</span> or above in the latest performance rating cycle. <br>
+                3.  An employee applicant on a <span class="highlight">Performance Improvement Plan(PIP)</span> may <span class="highlight">not</span> apply for a new position or transfer.
+            </p>
+        </div>
+        <div class="lang-zh">
+            <p class="intro-text">
+                如果員工申請人符合該職位的<span class="highlight">基本能力要求</span>，將被安排與招聘經理進行面試。
+                除了符合職位的基本能力要求外，員工申請人還必須符合以下標準：<br>
+                1.  員工申請人必須在現職位服務滿<span class="highlight">十二個月</span>。<br>
+                2.  員工申請人在最近一次績效評估週期中，必須被評定為 <span class="highlight">S(滿意)</span> 或以上。<br>
+                3.  正在執行<span class="highlight">績效改進計畫(PIP)</span>的員工申請人<span class="highlight">不得</span>申請新職位或轉調。
+            </p>
+        </div>
+    </div>
 
-    <div class="search-and-filter-bar">
-        <div class="lang-en">
-            <input type="text" id="searchInput" placeholder="Search for jobs..." oninput="filterAndSearch()">
-            <select id="departmentFilter" onchange="filterAndSearch()">
-                <option value="all">All Departments</option>
-                <option value="IT Division">IT Division</option>
-                <option value="APAC Division">APAC Division</option>
-                <option value="Marketing Division">Marketing Division</option>
-            </select>
-            <select id="durationFilter" onchange="filterAndSearch()">
-                <option value="all">All Durations</option>
-                <option value="Permanent position">Permanent</option>
-                <option value="Temporary position">Temporary</option>
-            </select>
-            <select id="gradeFilter" onchange="filterAndSearch()">
-                <option value="all">All Grades</option>
-                <option value="4 Grade">4 Grade</option>
-                <option value="6 Grade">6 Grade</option>
-                <option value="10 Grade">10 Grade</option>
-            </select>
-        </div>
-        <div class="lang-zh">
-            <input type="text" id="searchInputZh" placeholder="搜尋職位..." oninput="filterAndSearch()">
-            <select id="departmentFilterZh" onchange="filterAndSearch()">
-                <option value="all">所有部門</option>
-                <option value="IT Division">資訊技術部門</option>
-                <option value="APAC Division">亞太區部門</option>
-                <option value="Marketing Division">行銷部門</option>
-            </select>
-            <select id="durationFilterZh" onchange="filterAndSearch()">
-                <option value="all">所有性質</option>
-                <option value="Permanent position">長期</option>
-                <option value="Temporary position">短期</option>
-            </select>
-            <select id="gradeFilterZh" onchange="filterAndSearch()">
-                <option value="all">所有職等</option>
-                <option value="4 Grade">4 職等</option>
-                <option value="6 Grade">6 職等</option>
-                <option value="10 Grade">10 職等</option>
-            </select>
-        </div>
-    </div>
+    <div class="search-and-filter-bar">
+        <div class="lang-en">
+            <input type="text" id="searchInput" placeholder="Search for jobs..." oninput="filterAndSearch()">
+            <select id="departmentFilter" onchange="filterAndSearch()">
+                <option value="all">All Departments</option>
+                <option value="IT Division">IT Division</option>
+                <option value="APAC Division">APAC Division</option>
+                <option value="Marketing Division">Marketing Division</option>
+            </select>
+            <select id="durationFilter" onchange="filterAndSearch()">
+                <option value="all">All Durations</option>
+                <option value="Permanent position">Permanent</option>
+                <option value="Temporary position">Temporary</option>
+            </select>
+            <select id="gradeFilter" onchange="filterAndSearch()">
+                <option value="all">All Grades</option>
+                <option value="4 Grade">4 Grade</option>
+                <option value="6 Grade">6 Grade</option>
+                <option value="10 Grade">10 Grade</option>
+            </select>
+        </div>
+        <div class="lang-zh">
+            <input type="text" id="searchInputZh" placeholder="搜尋職位..." oninput="filterAndSearch()">
+            <select id="departmentFilterZh" onchange="filterAndSearch()">
+                <option value="all">所有部門</option>
+                <option value="IT Division">資訊技術部門</option>
+                <option value="APAC Division">亞太區部門</option>
+                <option value="Marketing Division">行銷部門</option>
+            </select>
+            <select id="durationFilterZh" onchange="filterAndSearch()">
+                <option value="all">所有性質</option>
+                <option value="Permanent position">長期</option>
+                <option value="Temporary position">短期</option>
+            </select>
+            <select id="gradeFilterZh" onchange="filterAndSearch()">
+                <option value="all">所有職等</option>
+                <option value="4 Grade">4 職等</option>
+                <option value="6 Grade">6 職等</option>
+                <option value="10 Grade">10 職等</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="lang-en result-count" id="result-count-en"></div>
+    <div class="lang-zh result-count" id="result-count-zh"></div>
+    
+    <div id="job-listings"></div>
 
-    ...
-    <div class="lang-en result-count" id="result-count-en"></div>
-    <div class="lang-zh result-count" id="result-count-zh"></div>
-     
-    <div id="job-listings"></div>
-    ...
+    <div class="forms-section">
+        <div class="lang-en">
+            <h2 class="section-title">Application Form</h2>
+        </div>
+        <div class="lang-zh">
+            <h2 class="section-title">內轉申請表</h2>
+        </div>
 
-    <div class="forms-section">
-        <div class="lang-en">
-            <h2 class="section-title">Application Form</h2>
-        </div>
-        <div class="lang-zh">
-            <h2 class="section-title">內轉申請表</h2>
-        </div>
+        <p class="links lang-en">
+            If the form does not display as expected, please refer to 
+            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=NVi7uIB-zEuXaN8PQviID9ahXQ2Y9QZDiPDefAVXMrRUOVNKR0JIWkM2S0dISVgwVEcwWTM2OU9CQS4u" target="_blank">
+            this page</a>.
+            
+        </p>
+        <p class="links lang-zh">
+            如果申請表沒有如期顯示，請點擊
+            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=NVi7uIB-zEuXaN8PQviID9ahXQ2Y9QZDiPDefAVXMrRUOVNKR0JIWkM2S0dISVgwVEcwWTM2OU9CQS4u" target="_blank">
+            頁面跳轉</a>
+            。
+        </p>
+        
+        <iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=NVi7uIB-zEuXaN8PQviID9ahXQ2Y9QZDiPDefAVXMrRUOVNKR0JIWkM2S0dISVgwVEcwWTM2OU9CQS4u&embed=true&lang=en" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+    
+    </div>
 
-        <p class="links lang-en">
-            If the form does not display as expected, please refer to 
-            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=NVi7uIB-zEuXaN8PQviID9ahXQ2Y9QZDiPDefAVXMrRUOVNKR0JIWkM2S0dISVgwVEcwWTM2OU9CQS4u" target="_blank">
-            this page</a>.
-            
-        </p>
-        <p class="links lang-zh">
-            如果申請表沒有如期顯示，請點擊
-            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=NVi7uIB-zEuXaN8PQviID9ahXQ2Y9QZDiPDefAVXMrRUOVNKR0JIWkM2S0dISVgwVEcwWTM2OU9CQS4u" target="_blank">
-            頁面跳轉</a>
-            。
-        </p>
-        
-        <iframe width="640px" height="480px" src="https://forms.office.com/Pages/ResponsePage.aspx?id=NVi7uIB-zEuXaN8PQviID9ahXQ2Y9QZDiPDefAVXMrRUOVNKR0JIWkM2S0dISVgwVEcwWTM2OU9CQS4u&embed=true&lang=en" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:100vh" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
-    
-    </div>
+    <button id="scrollToTopBtn" title="Go to top">▲</button>
 
-    <button id="scrollToTopBtn" title="Go to top">▲</button>
+    <script>
+        let allJobs = [];
 
-<script>
-    let jobData = [];
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            localStorage.setItem('lang', lang);
 
-    async function loadJobs() {
-        try {
-            const response = await fetch('jobs.json');
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            if (lang === 'zh-TW') {
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'block');
+                document.getElementById('lang-zh-btn').classList.add('active');
+                document.getElementById('lang-en-btn').classList.remove('active');
+            } else {
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'block');
+                document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'none');
+                document.getElementById('lang-en-btn').classList.add('active');
+                document.getElementById('lang-zh-btn').classList.remove('active');
             }
-            jobData = await response.json();
-            renderJobs(jobData);
             filterAndSearch();
-        } catch (error) {
-            console.error('Failed to load jobs:', error);
+        }
+
+        async function fetchJobs() {
+            try {
+                const response = await fetch('jobs.json');
+                allJobs = await response.json();
+                renderJobCards();
+            } catch (error) {
+                console.error('Failed to fetch jobs:', error);
+            }
+        }
+
+        function renderJobCards() {
             const jobListingsContainer = document.getElementById('job-listings');
-            jobListingsContainer.innerHTML = '<p style="text-align:center; color:red;">無法載入職位資訊，請稍後再試。</p>';
-        }
-    }
+            jobListingsContainer.innerHTML = ''; 
 
-    function renderJobs(jobs) {
-        const jobListingsContainer = document.getElementById('job-listings');
-        jobListingsContainer.innerHTML = '';
-        const isEnglish = document.documentElement.lang === 'en';
-
-        if (jobs.length === 0) {
-            jobListingsContainer.innerHTML = `<p style="text-align:center; padding: 20px;">${isEnglish ? 'No jobs found.' : '沒有找到任何職位。'}</p>`;
-            return;
-        }
-
-        jobs.forEach(job => {
-            const descriptionHtml_en = job.description_en.map(item => `<li>${item}</li>`).join('');
-            const descriptionHtml_zh = job.description_zh.map(item => `<li>${item}</li>`).join('');
-            
-            const jobCardHtml = `
-                <div class="job-card" data-department="${job.department_data}" data-duration="${job.duration_data}" data-grade="${job.grade_data}">
+            allJobs.forEach(job => {
+                const card = document.createElement('div');
+                card.className = 'job-card';
+                card.setAttribute('data-department', job.department);
+                card.setAttribute('data-duration', job.duration);
+                card.setAttribute('data-grade', job.grade);
+                
+                const isEnglish = document.documentElement.lang === 'en';
+                
+                card.innerHTML = `
                     <div class="card-header">
                         <h2 class="lang-en">${job.title_en}</h2>
                         <h2 class="lang-zh">${job.title_zh}</h2>
-                        <span class="department lang-en">${job.department_en}</span>
+                        <span class="department lang-en">${job.department}</span>
                         <span class="department lang-zh">${job.department_zh}</span>
                     </div>
                     <p class="summary lang-en">
-                        <span class="highlight">${job.duration_en}</span><br>
-                        <span class="highlight">Job Grade : ${job.grade_en}</span><br>
+                        <span class="highlight">${job.duration}</span><br>
+                        <span class="highlight">Job Grade : ${job.grade}</span><br>
                         ${job.summary_en}
                     </p>
                     <p class="summary lang-zh">
@@ -403,139 +411,117 @@
                         <span class="highlight">職等：${job.grade_zh}</span><br>
                         ${job.summary_zh}
                     </p>
+                    
                     <div class="lang-en">
                         <button onclick="toggleInfo('${job.id}')">more info</button>
                     </div>
                     <div class="lang-zh">
                         <button onclick="toggleInfo('${job.id}')">了解更多</button>
                     </div>
-                    <div id="${job.id}" class="more-info" style="display:none;">
+                    
+                    <div id="${job.id}" class="more-info">
                         <h3 class="lang-en">Job Description</h3>
                         <h3 class="lang-zh">工作內容</h3>
-                        <ul class="lang-en">${descriptionHtml_en}</ul>
-                        <ul class="lang-zh">${descriptionHtml_zh}</ul>
+                        <ul class="lang-en">
+                            ${job.description_en.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
+                        <ul class="lang-zh">
+                            ${job.description_zh.map(item => `<li>${item}</li>`).join('')}
+                        </ul>
                         
                         <h3 class="lang-en">Required skills</h3>
                         <h3 class="lang-zh">所需技能</h3>
                         <p class="lang-en">${job.skills_en}</p>
                         <p class="lang-zh">${job.skills_zh}</p>
-
+                        
                         <h3 class="lang-en">Hiring Manager</h3>
                         <h3 class="lang-zh">招聘主管</h3>
                         <p class="lang-en">${job.hiring_manager}</p>
                         <p class="lang-zh">${job.hiring_manager}</p>
                     </div>
-                </div>
-            `;
-            jobListingsContainer.innerHTML += jobCardHtml;
+                `;
+                jobListingsContainer.appendChild(card);
+            });
+
+            setLanguage(document.documentElement.lang); 
+        }
+
+        window.onload = function() {
+            const savedLang = localStorage.getItem('lang') || 'en';
+            setLanguage(savedLang);
+            fetchJobs(); 
+
+            document.getElementById('lang-en-btn').addEventListener('click', () => setLanguage('en'));
+            document.getElementById('lang-zh-btn').addEventListener('click', () => setLanguage('zh-TW'));
+        };
+
+        function toggleInfo(id) {
+            const element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+        
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        window.onscroll = function() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        };
+
+        scrollToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
-        setLanguage(document.documentElement.lang);
-    }
-    
-    function setLanguage(lang) {
-        document.documentElement.lang = lang;
-        localStorage.setItem('lang', lang);
+        function filterAndSearch() {
+            const isEnglish = document.documentElement.lang === 'en';
+            const searchInput = isEnglish ? document.getElementById('searchInput').value.toLowerCase() : document.getElementById('searchInputZh').value.toLowerCase();
+            const departmentFilter = isEnglish ? document.getElementById('departmentFilter').value : document.getElementById('departmentFilterZh').value;
+            const durationFilter = isEnglish ? document.getElementById('durationFilter').value : document.getElementById('durationFilterZh').value;
+            const gradeFilter = isEnglish ? document.getElementById('gradeFilter').value : document.getElementById('gradeFilterZh').value;
 
-        if (lang === 'zh-TW') {
-            document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'block');
-            document.getElementById('lang-zh-btn').classList.add('active');
-            document.getElementById('lang-en-btn').classList.remove('active');
-            document.getElementById('searchInput').style.display = 'none';
-            document.getElementById('departmentFilter').style.display = 'none';
-            document.getElementById('durationFilter').style.display = 'none';
-            document.getElementById('gradeFilter').style.display = 'none';
-            document.getElementById('searchInputZh').style.display = 'inline-block';
-            document.getElementById('departmentFilterZh').style.display = 'inline-block';
-            document.getElementById('durationFilterZh').style.display = 'inline-block';
-            document.getElementById('gradeFilterZh').style.display = 'inline-block';
-        } else {
-            document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'block');
-            document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'none');
-            document.getElementById('lang-en-btn').classList.add('active');
-            document.getElementById('lang-zh-btn').classList.remove('active');
-            document.getElementById('searchInput').style.display = 'inline-block';
-            document.getElementById('departmentFilter').style.display = 'inline-block';
-            document.getElementById('durationFilter').style.display = 'inline-block';
-            document.getElementById('gradeFilter').style.display = 'inline-block';
-            document.getElementById('searchInputZh').style.display = 'none';
-            document.getElementById('departmentFilterZh').style.display = 'none';
-            document.getElementById('durationFilterZh').style.display = 'none';
-            document.getElementById('gradeFilterZh').style.display = 'none';
+            const jobCards = document.querySelectorAll('.job-card');
+
+            let visibleJobs = 0;
+
+            jobCards.forEach(card => {
+                const department = card.getAttribute('data-department');
+                const duration = card.getAttribute('data-duration');
+                const grade = card.getAttribute('data-grade');
+                
+                const cardText = card.textContent.toLowerCase();
+
+                const matchesSearch = cardText.includes(searchInput);
+                const matchesDepartment = departmentFilter === 'all' || department === departmentFilter;
+                const matchesDuration = durationFilter === 'all' || duration.includes(durationFilter); 
+                const matchesGrade = gradeFilter === 'all' || grade === gradeFilter;
+
+                if (matchesSearch && matchesDepartment && matchesDuration && matchesGrade) {
+                    card.style.display = 'block';
+                    visibleJobs++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            const resultCountEn = document.getElementById('result-count-en');
+            const resultCountZh = document.getElementById('result-count-zh');
+            
+            if (isEnglish) {
+                resultCountEn.textContent = `${visibleJobs} job(s) found.`;
+                resultCountZh.textContent = '';
+            } else {
+                resultCountZh.textContent = `找到 ${visibleJobs} 個職位。`;
+                resultCountEn.textContent = '';
+            }
         }
-        filterAndSearch();
-    }
-    
-    window.onload = function() {
-        const savedLang = localStorage.getItem('lang') || 'en';
-        setLanguage(savedLang);
-
-        document.getElementById('lang-en-btn').addEventListener('click', () => setLanguage('en'));
-        document.getElementById('lang-zh-btn').addEventListener('click', () => setLanguage('zh-TW'));
-        
-        loadJobs();
-    };
-    
-    function toggleInfo(id) {
-        const element = document.getElementById(id);
-        if (element.style.display === "none" || element.style.display === "") {
-            element.style.display = "block";
-        } else {
-            element.style.display = "none";
-        }
-    }
-    
-    const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-    window.onscroll = function() {
-        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-            scrollToTopBtn.style.display = "block";
-        } else {
-            scrollToTopBtn.style.display = "none";
-        }
-    };
-
-    scrollToTopBtn.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    function filterAndSearch() {
-        const isEnglish = document.documentElement.lang === 'en';
-        
-        const searchInput = isEnglish ? document.getElementById('searchInput').value.toLowerCase() : document.getElementById('searchInputZh').value.toLowerCase();
-        const departmentFilter = isEnglish ? document.getElementById('departmentFilter').value : document.getElementById('departmentFilterZh').value;
-        const durationFilter = isEnglish ? document.getElementById('durationFilter').value : document.getElementById('durationFilterZh').value;
-        const gradeFilter = isEnglish ? document.getElementById('gradeFilter').value : document.getElementById('gradeFilterZh').value;
-
-        const filteredJobs = jobData.filter(job => {
-            const cardText = isEnglish ? 
-                `${job.title_en} ${job.summary_en} ${job.department_en} ${job.duration_en} ${job.grade_en}`.toLowerCase() : 
-                `${job.title_zh} ${job.summary_zh} ${job.department_zh} ${job.duration_zh} ${job.grade_zh}`.toLowerCase();
-
-            const matchesSearch = cardText.includes(searchInput);
-            const matchesDepartment = departmentFilter === 'all' || job.department_data === departmentFilter;
-            const matchesDuration = durationFilter === 'all' || job.duration_data === durationFilter;
-            const matchesGrade = gradeFilter === 'all' || job.grade_data === gradeFilter;
-
-            return matchesSearch && matchesDepartment && matchesDuration && matchesGrade;
-        });
-
-        renderJobs(filteredJobs);
-
-        const resultCountEn = document.getElementById('result-count-en');
-        const resultCountZh = document.getElementById('result-count-zh');
-        
-        if (isEnglish) {
-            resultCountEn.textContent = `${filteredJobs.length} job(s) found.`;
-            resultCountZh.textContent = '';
-        } else {
-            resultCountZh.textContent = `找到 ${filteredJobs.length} 個職位。`;
-            resultCountEn.textContent = '';
-        }
-    }
-</script>
+    </script>
 </body>
 </html>
