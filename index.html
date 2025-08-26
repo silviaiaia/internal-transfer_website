@@ -369,7 +369,7 @@
             departmentFilterEn.appendChild(optionEn);
 
             const optionZh = document.createElement('option');
-            optionZh.value = dept;
+            optionZh.value = allJobs.find(job => job.department === dept).department_zh;
             optionZh.textContent = allJobs.find(job => job.department === dept).department_zh;
             departmentFilterZh.appendChild(optionZh);
         });
@@ -381,7 +381,7 @@
             durationFilterEn.appendChild(optionEn);
 
             const optionZh = document.createElement('option');
-            optionZh.value = dur;
+            optionZh.value = allJobs.find(job => job.duration === dur).duration_zh;
             optionZh.textContent = allJobs.find(job => job.duration === dur).duration_zh;
             durationFilterZh.appendChild(optionZh);
         });
@@ -393,7 +393,7 @@
             gradeFilterEn.appendChild(optionEn);
 
             const optionZh = document.createElement('option');
-            optionZh.value = grade;
+            optionZh.value = allJobs.find(job => job.grade === grade).grade_zh;
             optionZh.textContent = allJobs.find(job => job.grade === grade).grade_zh;
             gradeFilterZh.appendChild(optionZh);
         });
