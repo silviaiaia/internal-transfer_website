@@ -381,7 +381,17 @@
             durations.forEach(duration => {
                 const optionEn = document.createElement('option');
                 optionEn.value = duration;
-                optionEn.textContent = duration;
+                let displayNameEn = duration;
+                if (duration.includes('Permanent')) {
+                    displayNameEn = 'Permanent';
+                } else if (duration.includes('Temporary')) {
+                    displayNameEn = 'Temporary';
+                } else if (duration.includes('Contract')) {
+                    displayNameEn = 'Contract';
+                } else {
+                    displayNameEn = duration.replace(' position', '');
+                }
+                optionEn.textContent = displayNameEn;
                 durationFilterEn.appendChild(optionEn);
 
                 const optionZh = document.createElement('option');
@@ -391,10 +401,12 @@
                     displayName = '長期職位';
                 } else if (duration.includes('Temporary')) {
                     displayName = '短期職位';
+                } else if (duration.includes('Contract')) {
+                    displayName = '合約職位';
                 } else {
                     const job = allJobs.find(j => j.duration === duration);
                     if (job && job.duration_zh) {
-                        displayName = job.duration_zh.split('/')[0].trim();
+                        displayName = job.duration_zh.split('/')[0].trim(); // 移除 "/ 6個月" 等時間資訊
                     }
                 }
                 optionZh.textContent = displayName;
@@ -439,7 +451,7 @@
                 allJobs = await response.json();
 
                 populateFilterOptions();
-                
+
                 renderJobCards();
             } catch (error) {
                 console.error('Failed to fetch jobs:', error);
