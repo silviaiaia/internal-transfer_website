@@ -281,25 +281,43 @@
             <input type="text" id="searchInput" placeholder="Search for jobs..." oninput="filterAndSearch()">
             <select id="departmentFilter" onchange="filterAndSearch()">
                 <option value="all">All Departments</option>
+                <option value="IT Division">IT Division</option>
+                <option value="APAC Division">APAC Division</option>
+                <option value="Marketing Division">Marketing Division</option>
+                <option value="Human Resource Department">Human Resource Department</option>
             </select>
             <select id="durationFilter" onchange="filterAndSearch()">
                 <option value="all">All Durations</option>
-                </select>
+                <option value="Permanent position">Permanent</option>
+                <option value="Temporary position">Temporary</option>
+            </select>
             <select id="gradeFilter" onchange="filterAndSearch()">
                 <option value="all">All Grades</option>
-                </select>
+                <option value="4 Grade">4 Grade</option>
+                <option value="6 Grade">6 Grade</option>
+                <option value="10 Grade">10 Grade</option>
+            </select>
         </div>
         <div class="lang-zh">
             <input type="text" id="searchInputZh" placeholder="搜尋職位..." oninput="filterAndSearch()">
             <select id="departmentFilterZh" onchange="filterAndSearch()">
                 <option value="all">所有部門</option>
-                </select>
+                <option value="IT Division">資訊技術部門</option>
+                <option value="APAC Division">亞太區部門</option>
+                <option value="Marketing Division">行銷部門</option>
+                <option value="Human Resource Department">人力資源部門</option>
+            </select>
             <select id="durationFilterZh" onchange="filterAndSearch()">
                 <option value="all">所有性質</option>
-                </select>
+                <option value="Permanent position">長期</option>
+                <option value="Temporary position">短期</option>
+            </select>
             <select id="gradeFilterZh" onchange="filterAndSearch()">
                 <option value="all">所有職等</option>
-                </select>
+                <option value="4 Grade">4 職等</option>
+                <option value="6 Grade">6 職等</option>
+                <option value="10 Grade">10 職等</option>
+            </select>
         </div>
     </div>
     
@@ -336,239 +354,180 @@
     <button id="scrollToTopBtn" title="Go to top">▲</button>
 
     <script>
-    let allJobs = [];
+        let allJobs = [];
 
-    async function fetchJobs() {
-        try {
-            const response = await fetch('jobs.json');
-            allJobs = await response.json();
-            populateFilters();
-            renderJobCards(allJobs);
-        } catch (error) {
-            console.error('Failed to fetch jobs:', error);
-            document.getElementById('job-listings').innerHTML = '未能加載職位資訊，請檢查檔案路徑。';
-        }
-    }
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            localStorage.setItem('lang', lang);
 
-    function populateFilters() {
-        const departments = [...new Set(allJobs.map(job => job.department))].sort();
-        const durations = [...new Set(allJobs.map(job => job.duration))].sort();
-        const grades = [...new Set(allJobs.map(job => job.grade))].sort();
-
-        const departmentFilterEn = document.getElementById('departmentFilter');
-        const durationFilterEn = document.getElementById('durationFilter');
-        const gradeFilterEn = document.getElementById('gradeFilter');
-        const departmentFilterZh = document.getElementById('departmentFilterZh');
-        const durationFilterZh = document.getElementById('durationFilterZh');
-        const gradeFilterZh = document.getElementById('gradeFilterZh');
-
-        // Populate Department Filters
-        departments.forEach(dept => {
-            const optionEn = document.createElement('option');
-            optionEn.value = dept;
-            optionEn.textContent = dept;
-            departmentFilterEn.appendChild(optionEn);
-
-            const optionZh = document.createElement('option');
-            optionZh.value = dept;
-            optionZh.textContent = allJobs.find(job => job.department === dept)?.department_zh || dept;
-            departmentFilterZh.appendChild(optionZh);
-        });
-
-        // Populate Duration Filters
-        durations.forEach(dur => {
-            const optionEn = document.createElement('option');
-            optionEn.value = dur;
-            optionEn.textContent = dur;
-            durationFilterEn.appendChild(optionEn);
-
-            const optionZh = document.createElement('option');
-            optionZh.value = dur;
-            optionZh.textContent = allJobs.find(job => job.duration === dur)?.duration_zh || dur;
-            durationFilterZh.appendChild(optionZh);
-        });
-
-        // Populate Grade Filters
-        grades.forEach(grade => {
-            const optionEn = document.createElement('option');
-            optionEn.value = grade;
-            optionEn.textContent = grade;
-            gradeFilterEn.appendChild(optionEn);
-
-            const optionZh = document.createElement('option');
-            optionZh.value = grade;
-            optionZh.textContent = allJobs.find(job => job.grade === grade)?.grade_zh || grade;
-            gradeFilterZh.appendChild(optionZh);
-        });
-    }
-
-    function renderJobCards(jobs) {
-        const jobListingsContainer = document.getElementById('job-listings');
-        jobListingsContainer.innerHTML = '';
-        
-        if (jobs.length === 0) {
-            const message = document.createElement('p');
-            message.style.textAlign = 'center';
-            message.style.marginTop = '20px';
-            message.style.fontSize = '1.2em';
-            message.innerHTML = document.documentElement.lang === 'en' ? 'No jobs found.' : '未找到相關職位。';
-            jobListingsContainer.appendChild(message);
+            if (lang === 'zh-TW') {
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+                document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'block');
+                document.getElementById('lang-zh-btn').classList.add('active');
+                document.getElementById('lang-en-btn').classList.remove('active');
+            } else {
+                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'block');
+                document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'none');
+                document.getElementById('lang-en-btn').classList.add('active');
+                document.getElementById('lang-zh-btn').classList.remove('active');
+            }
+            filterAndSearch();
         }
 
-        jobs.forEach(job => {
-            const card = document.createElement('div');
-            card.className = 'job-card';
-            card.setAttribute('data-department', job.department);
-            card.setAttribute('data-duration', job.duration);
-            card.setAttribute('data-grade', job.grade);
-            
-            card.innerHTML = `
-                <div class="card-header">
-                    <div class="lang-en">
-                        <h2>${job.title_en}</h2>
-                    </div>
-                    <div class="lang-zh">
-                        <h2>${job.title_zh}</h2>
-                    </div>
-                    <span class="department lang-en">${job.department}</span>
-                    <span class="department lang-zh">${job.department_zh}</span>
-                </div>
-                <div class="lang-en">
-                    <p class="summary">
-                        <span class="highlight">${job.duration}</span><br>
-                        <span class="highlight">Job Grade : ${job.grade}</span><br>
-                        ${job.summary_en}
-                    </p>
-                    <button onclick="toggleInfo('${job.id}')">more info</button>
-                </div>
-                <div class="lang-zh">
-                    <p class="summary">
-                        <span class="highlight">${job.duration_zh}</span><br>
-                        <span class="highlight">職等：${job.grade_zh}</span><br>
-                        ${job.summary_zh}
-                    </p>
-                    <button onclick="toggleInfo('${job.id}')">了解更多</button>
-                </div>
+        async function fetchJobs() {
+            try {
+                const response = await fetch('jobs.json');
+                allJobs = await response.json();
+                renderJobCards();
+            } catch (error) {
+                console.error('Failed to fetch jobs:', error);
+            }
+        }
+
+        function renderJobCards() {
+            const jobListingsContainer = document.getElementById('job-listings');
+            jobListingsContainer.innerHTML = ''; 
+
+            allJobs.forEach(job => {
+                const card = document.createElement('div');
+                card.className = 'job-card';
+                card.setAttribute('data-department', job.department);
+                card.setAttribute('data-duration', job.duration);
+                card.setAttribute('data-grade', job.grade);
                 
-                <div id="${job.id}" class="more-info">
+                card.innerHTML = `
+                    <div class="card-header">
+                        <div class="lang-en">
+                            <h2>${job.title_en}</h2>
+                        </div>
+                        <div class="lang-zh">
+                            <h2>${job.title_zh}</h2>
+                        </div>
+                        <span class="department lang-en">${job.department}</span>
+                        <span class="department lang-zh">${job.department_zh}</span>
+                    </div>
                     <div class="lang-en">
-                        <h3>Job Description</h3>
-                        <ul>
-                            ${job.description_en.map(item => `<li>${item}</li>`).join('')}
-                        </ul>
-                        <h3>Required skills</h3>
-                        <p>${job.skills_en}</p>
-                        <h3>Hiring Manager</h3>
-                        <p>${job.hiring_manager}</p>
+                        <p class="summary">
+                            <span class="highlight">${job.duration}</span><br>
+                            <span class="highlight">Job Grade : ${job.grade}</span><br>
+                            ${job.summary_en}
+                        </p>
+                        <button onclick="toggleInfo('${job.id}')">more info</button>
                     </div>
                     <div class="lang-zh">
-                        <h3>工作內容</h3>
-                        <ul>
-                            ${job.description_zh.map(item => `<li>${item}</li>`).join('')}
-                        </ul>
-                        <h3>所需技能</h3>
-                        <p>${job.skills_zh}</p>
-                        <h3>招聘主管</h3>
-                        <p>${job.hiring_manager}</p>
+                        <p class="summary">
+                            <span class="highlight">${job.duration_zh}</span><br>
+                            <span class="highlight">職等：${job.grade_zh}</span><br>
+                            ${job.summary_zh}
+                        </p>
+                        <button onclick="toggleInfo('${job.id}')">了解更多</button>
                     </div>
-                </div>
-            `;
-            jobListingsContainer.appendChild(card);
+                    
+                    <div id="${job.id}" class="more-info">
+                        <div class="lang-en">
+                            <h3>Job Description</h3>
+                            <ul>
+                                ${job.description_en.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                            <h3>Required skills</h3>
+                            <p>${job.skills_en}</p>
+                            <h3>Hiring Manager</h3>
+                            <p>${job.hiring_manager}</p>
+                        </div>
+                        <div class="lang-zh">
+                            <h3>工作內容</h3>
+                            <ul>
+                                ${job.description_zh.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                            <h3>所需技能</h3>
+                            <p>${job.skills_zh}</p>
+                            <h3>招聘主管</h3>
+                            <p>${job.hiring_manager}</p>
+                        </div>
+                    </div>
+                `;
+                jobListingsContainer.appendChild(card);
+            });
+
+            setLanguage(document.documentElement.lang); 
+        }
+
+        window.onload = function() {
+            const savedLang = localStorage.getItem('lang') || 'en';
+            setLanguage(savedLang);
+            fetchJobs(); 
+
+            document.getElementById('lang-en-btn').addEventListener('click', () => setLanguage('en'));
+            document.getElementById('lang-zh-btn').addEventListener('click', () => setLanguage('zh-TW'));
+        };
+
+        function toggleInfo(id) {
+            const element = document.getElementById(id);
+            if (element.style.display === "none" || element.style.display === "") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+        
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        window.onscroll = function() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        };
+
+        scrollToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
-        setLanguage(document.documentElement.lang);
-    }
+        function filterAndSearch() {
+            const isEnglish = document.documentElement.lang === 'en';
+            const searchInput = isEnglish ? document.getElementById('searchInput').value.toLowerCase() : document.getElementById('searchInputZh').value.toLowerCase();
+            const departmentFilter = isEnglish ? document.getElementById('departmentFilter').value : document.getElementById('departmentFilterZh').value;
+            const durationFilter = isEnglish ? document.getElementById('durationFilter').value : document.getElementById('durationFilterZh').value;
+            const gradeFilter = isEnglish ? document.getElementById('gradeFilter').value : document.getElementById('gradeFilterZh').value;
 
-    function setLanguage(lang) {
-        document.documentElement.lang = lang;
-        localStorage.setItem('lang', lang);
+            const jobCards = document.querySelectorAll('.job-card');
 
-        if (lang === 'zh-TW') {
-            document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'block');
-            document.getElementById('lang-zh-btn').classList.add('active');
-            document.getElementById('lang-en-btn').classList.remove('active');
-        } else {
-            document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'block');
-            document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'none');
-            document.getElementById('lang-en-btn').classList.add('active');
-            document.getElementById('lang-zh-btn').classList.remove('active');
-        }
-        filterAndSearch();
-    }
+            let visibleJobs = 0;
 
-    window.onload = function() {
-        const savedLang = localStorage.getItem('lang') || 'en';
-        setLanguage(savedLang);
-        fetchJobs(); 
+            jobCards.forEach(card => {
+                const department = card.getAttribute('data-department');
+                const duration = card.getAttribute('data-duration');
+                const grade = card.getAttribute('data-grade');
+                
+                const cardText = card.textContent.toLowerCase();
 
-        document.getElementById('lang-en-btn').addEventListener('click', () => setLanguage('en'));
-        document.getElementById('lang-zh-btn').addEventListener('click', () => setLanguage('zh-TW'));
-    };
+                const matchesSearch = cardText.includes(searchInput);
+                const matchesDepartment = departmentFilter === 'all' || department === departmentFilter;
+                const matchesDuration = durationFilter === 'all' || duration.includes(durationFilter); 
+                const matchesGrade = gradeFilter === 'all' || grade === gradeFilter;
 
-    function toggleInfo(id) {
-        const element = document.getElementById(id);
-        if (element.style.display === "none" || element.style.display === "") {
-            element.style.display = "block";
-        } else {
-            element.style.display = "none";
-        }
-    }
-    
-    const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-    window.onscroll = function() {
-        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-            scrollToTopBtn.style.display = "block";
-        } else {
-            scrollToTopBtn.style.display = "none";
-        }
-    };
+                if (matchesSearch && matchesDepartment && matchesDuration && matchesGrade) {
+                    card.style.display = 'block';
+                    visibleJobs++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
 
-    scrollToTopBtn.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    function filterAndSearch() {
-        const isEnglish = document.documentElement.lang === 'en';
-        
-        const searchInput = isEnglish ? document.getElementById('searchInput').value.toLowerCase() : document.getElementById('searchInputZh').value.toLowerCase();
-        
-        const departmentFilterElement = isEnglish ? document.getElementById('departmentFilter') : document.getElementById('departmentFilterZh');
-        const durationFilterElement = isEnglish ? document.getElementById('durationFilter') : document.getElementById('durationFilterZh');
-        const gradeFilterElement = isEnglish ? document.getElementById('gradeFilter') : document.getElementById('gradeFilterZh');
-
-        const departmentFilter = departmentFilterElement.value;
-        const durationFilter = durationFilterElement.value;
-        const gradeFilter = gradeFilterElement.value;
-
-        const filteredJobs = allJobs.filter(job => {
-            const matchesSearch = isEnglish ? 
-                (job.title_en.toLowerCase().includes(searchInput) || job.summary_en.toLowerCase().includes(searchInput) || job.skills_en.toLowerCase().includes(searchInput)) :
-                (job.title_zh.toLowerCase().includes(searchInput) || job.summary_zh.toLowerCase().includes(searchInput) || job.skills_zh.toLowerCase().includes(searchInput));
+            const resultCountEn = document.getElementById('result-count-en');
+            const resultCountZh = document.getElementById('result-count-zh');
             
-            const matchesDepartment = departmentFilter === 'all' || job.department === departmentFilter;
-            const matchesDuration = durationFilter === 'all' || job.duration.includes(durationFilter);
-            const matchesGrade = gradeFilter === 'all' || job.grade === gradeFilter;
-            
-            return matchesSearch && matchesDepartment && matchesDuration && matchesGrade;
-        });
-
-        renderJobCards(filteredJobs);
-
-        const resultCountEn = document.getElementById('result-count-en');
-        const resultCountZh = document.getElementById('result-count-zh');
-        
-        if (isEnglish) {
-            resultCountEn.textContent = `${filteredJobs.length} job(s) found.`;
-            resultCountZh.textContent = '';
-        } else {
-            resultCountZh.textContent = `找到 ${filteredJobs.length} 個職位。`;
-            resultCountEn.textContent = '';
+            if (isEnglish) {
+                resultCountEn.textContent = `${visibleJobs} job(s) found.`;
+                resultCountZh.textContent = '';
+            } else {
+                resultCountZh.textContent = `找到 ${visibleJobs} 個職位。`;
+                resultCountEn.textContent = '';
+            }
         }
-    }
     </script>
 </body>
 </html>
