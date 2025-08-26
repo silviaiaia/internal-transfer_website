@@ -335,7 +335,7 @@
 
     <button id="scrollToTopBtn" title="Go to top">▲</button>
 
-<script>
+    <script>
     let allJobs = [];
 
     async function fetchJobs() {
@@ -362,6 +362,7 @@
         const durationFilterZh = document.getElementById('durationFilterZh');
         const gradeFilterZh = document.getElementById('gradeFilterZh');
 
+        // Populate Department Filters
         departments.forEach(dept => {
             const optionEn = document.createElement('option');
             optionEn.value = dept;
@@ -369,11 +370,12 @@
             departmentFilterEn.appendChild(optionEn);
 
             const optionZh = document.createElement('option');
-            optionZh.value = dept; // 將值設為英文鍵值
-            optionZh.textContent = allJobs.find(job => job.department === dept).department_zh;
+            optionZh.value = dept;
+            optionZh.textContent = allJobs.find(job => job.department === dept)?.department_zh || dept;
             departmentFilterZh.appendChild(optionZh);
         });
 
+        // Populate Duration Filters
         durations.forEach(dur => {
             const optionEn = document.createElement('option');
             optionEn.value = dur;
@@ -381,11 +383,12 @@
             durationFilterEn.appendChild(optionEn);
 
             const optionZh = document.createElement('option');
-            optionZh.value = dur; // 將值設為英文鍵值
-            optionZh.textContent = allJobs.find(job => job.duration === dur).duration_zh;
+            optionZh.value = dur;
+            optionZh.textContent = allJobs.find(job => job.duration === dur)?.duration_zh || dur;
             durationFilterZh.appendChild(optionZh);
         });
 
+        // Populate Grade Filters
         grades.forEach(grade => {
             const optionEn = document.createElement('option');
             optionEn.value = grade;
@@ -393,8 +396,8 @@
             gradeFilterEn.appendChild(optionEn);
 
             const optionZh = document.createElement('option');
-            optionZh.value = grade; // 將值設為英文鍵值
-            optionZh.textContent = allJobs.find(job => job.grade === grade).grade_zh;
+            optionZh.value = grade;
+            optionZh.textContent = allJobs.find(job => job.grade === grade)?.grade_zh || grade;
             gradeFilterZh.appendChild(optionZh);
         });
     }
@@ -566,6 +569,6 @@
             resultCountEn.textContent = '';
         }
     }
-</script>
+    </script>
 </body>
 </html>
