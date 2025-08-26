@@ -338,6 +338,18 @@
 <script>
     let allJobs = [];
 
+    async function fetchJobs() {
+        try {
+            const response = await fetch('jobs.json');
+            allJobs = await response.json();
+            populateFilters();
+            renderJobCards(allJobs);
+        } catch (error) {
+            console.error('Failed to fetch jobs:', error);
+            document.getElementById('job-listings').innerHTML = '未能加載職位資訊，請檢查檔案路徑。';
+        }
+    }
+
     function populateFilters() {
         const departments = [...new Set(allJobs.map(job => job.department))].sort();
         const durations = [...new Set(allJobs.map(job => job.duration))].sort();
@@ -385,35 +397,6 @@
             optionZh.textContent = allJobs.find(job => job.grade === grade).grade_zh;
             gradeFilterZh.appendChild(optionZh);
         });
-    }
-
-    function setLanguage(lang) {
-        document.documentElement.lang = lang;
-        localStorage.setItem('lang', lang);
-
-        if (lang === 'zh-TW') {
-            document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'block');
-            document.getElementById('lang-zh-btn').classList.add('active');
-            document.getElementById('lang-en-btn').classList.remove('active');
-        } else {
-            document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'block');
-            document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'none');
-            document.getElementById('lang-en-btn').classList.add('active');
-            document.getElementById('lang-zh-btn').classList.remove('active');
-        }
-        filterAndSearch();
-    }
-
-    async function fetchJobs() {
-        try {
-            const response = await fetch('jobs.json');
-            allJobs = await response.json();
-            populateFilters();
-            renderJobCards(allJobs);
-        } catch (error) {
-            console.error('Failed to fetch jobs:', error);
-        }
     }
 
     function renderJobCards(jobs) {
@@ -484,6 +467,24 @@
         setLanguage(document.documentElement.lang);
     }
 
+    function setLanguage(lang) {
+        document.documentElement.lang = lang;
+        localStorage.setItem('lang', lang);
+
+        if (lang === 'zh-TW') {
+            document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'block');
+            document.getElementById('lang-zh-btn').classList.add('active');
+            document.getElementById('lang-en-btn').classList.remove('active');
+        } else {
+            document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'block');
+            document.querySelectorAll('.lang-zh').forEach(el => el.style.display = 'none');
+            document.getElementById('lang-en-btn').classList.add('active');
+            document.getElementById('lang-zh-btn').classList.remove('active');
+        }
+        filterAndSearch();
+    }
+
     window.onload = function() {
         const savedLang = localStorage.getItem('lang') || 'en';
         setLanguage(savedLang);
@@ -532,8 +533,10 @@
         const gradeFilter = gradeFilterElement.value;
 
         const filteredJobs = allJobs.filter(job => {
-            const cardText = JSON.stringify(isEnglish ? job : { ...job, department: job.department_zh, duration: job.duration_zh, grade: job.grade_zh, title: job.title_zh, summary: job.summary_zh, description: job.description_zh, skills: job.skills_zh }).toLowerCase();
-            const matchesSearch = cardText.includes(searchInput);
+            const matchesSearch = isEnglish ? 
+                (job.title_en.toLowerCase().includes(searchInput) || job.summary_en.toLowerCase().includes(searchInput) || job.skills_en.toLowerCase().includes(searchInput)) :
+                (job.title_zh.toLowerCase().includes(searchInput) || job.summary_zh.toLowerCase().includes(searchInput) || job.skills_zh.toLowerCase().includes(searchInput));
+            
             const matchesDepartment = departmentFilter === 'all' || (isEnglish ? job.department === departmentFilter : job.department_zh === departmentFilter);
             const matchesDuration = durationFilter === 'all' || (isEnglish ? job.duration.includes(durationFilter) : job.duration_zh.includes(durationFilter));
             const matchesGrade = gradeFilter === 'all' || (isEnglish ? job.grade === gradeFilter : job.grade_zh === gradeFilter);
