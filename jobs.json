@@ -93,7 +93,7 @@
     "grade_zh": "4職等",
     "title_en": "Human Resource Specialist",
     "title_zh": "人力資源專員",
-    "summary_en": "Supporting key HR functions to ensure a smooth employee lifecycle. You'll be involved in talent acquisition, performance management, and employee relations.",
+    "summary_en": "Support key HR functions to ensure a smooth employee lifecycle. You'll be involved in talent acquisition, performance management, and employee relations.",
     "summary_zh": "負責規劃與執行行銷活動，提升品牌知名度與產品銷售。",
     "description_en": [
       "Manage the end-to-end recruitment process, including sourcing, screening, and interviewing candidates.",
@@ -110,5 +110,35 @@
     "skills_en": "Knowledge of HR principles and practices. Strong communication and interpersonal skills. Proficiency in HRIS (Human Resource Information System) software is preferred.",
     "skills_zh": "熟悉人力資源原則與實務，精通人資資訊系統 (HRIS) 軟體，並具備強大的溝通和人際交往能力。",
     "hiring_manager": "Miss. Tangerine"
+  },
+    {
+    "id": "esg",
+    "department": "CSR & Sustainability Department",
+    "department_zh": "企業社會責任與永續發展部",
+    "duration": "Permanent position",
+    "duration_zh": "長期職位",
+    "grade": "12 Grade",
+    "grade_zh": "12職等",
+    "title_en": "Head of Sustainability Committee",
+    "title_zh": "永續委員會主管",
+    "summary_en": "Develop and implement strategies to drive environmental, social, and governance (ESG) performance.",
+    "summary_zh": "負責制定與執行策略，以提升環境、社會與公司治理（ESG）績效。",
+    "description_en": [
+        "Develop and execute a comprehensive corporate sustainability strategy.",
+        "Lead the Sustainability Committee and coordinate cross-functional teams.",
+        "Monitor and report on ESG performance and progress towards sustainability goals.",
+        "Engage with internal and external stakeholders on sustainability issues.",
+        "Stay up-to-date with industry best practices and emerging sustainability trends."
+    ],
+    "description_zh": [
+        "制定並執行全面的企業永續發展策略。",
+        "領導永續委員會並協調跨部門團隊。",
+        "監測和報告 ESG 績效以及永續目標的進展。",
+        "就永續議題與內部及外部利害關係人溝通協作。",
+        "掌握產業最佳實踐與新興永續發展趨勢。"
+    ],
+    "skills_en": "Experience in sustainability or ESG management. Strong leadership and communication skills. Knowledge of global sustainability standards.",
+    "skills_zh": "具備永續發展或 ESG 管理經驗。強大的領導與溝通能力。熟悉全球永續發展標準。",
+    "hiring_manager": "Mrs. Dolphin"
   }
 ]
