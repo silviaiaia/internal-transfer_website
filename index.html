@@ -260,18 +260,18 @@
             <p class="intro-text">
                 If the employee applicant meets the <span class="highlight">minimum competencies</span> for the position, the employee applicant will be scheduled to interview with the hiring manager. <br>
                 In addition to meeting the minimum competencies for the position, employee applicant must meet the following criteria : <br>
-                1.  The employee applicant must be in the current position for <span class="highlight">12 months</span>. <br>
-                2.  The employee applicant must be rated as <span class="highlight">S(Satisfactory)</span> or above in the latest performance rating cycle. <br>
-                3.  An employee applicant on a <span class="highlight">Performance Improvement Plan(PIP)</span> may <span class="highlight">not</span> apply for a new position or transfer.
+                1.  The employee applicant must be in the current position for <span class="highlight">12 months</span>. <br>
+                2.  The employee applicant must be rated as <span class="highlight">S(Satisfactory)</span> or above in the latest performance rating cycle. <br>
+                3.  An employee applicant on a <span class="highlight">Performance Improvement Plan(PIP)</span> may <span class="highlight">not</span> apply for a new position or transfer.
             </p>
         </div>
         <div class="lang-zh">
             <p class="intro-text">
                 如果員工申請人符合該職位的<span class="highlight">基本能力要求</span>，將被安排與招聘經理進行面試。
                 除了符合職位的基本能力要求外，員工申請人還必須符合以下標準：<br>
-                1.  員工申請人必須在現職位服務滿<span class="highlight">十二個月</span>。<br>
-                2.  員工申請人在最近一次績效評估週期中，必須被評定為 <span class="highlight">S(滿意)</span> 或以上。<br>
-                3.  正在執行<span class="highlight">績效改進計畫(PIP)</span>的員工申請人<span class="highlight">不得</span>申請新職位或轉調。
+                1.  員工申請人必須在現職位服務滿<span class="highlight">十二個月</span>。<br>
+                2.  員工申請人在最近一次績效評估週期中，必須被評定為 <span class="highlight">S(滿意)</span> 或以上。<br>
+                3.  正在執行<span class="highlight">績效改進計畫(PIP)</span>的員工申請人<span class="highlight">不得</span>申請新職位或轉調。
             </p>
         </div>
     </div>
@@ -281,42 +281,24 @@
             <input type="text" id="searchInput" placeholder="Search for jobs..." oninput="filterAndSearch()">
             <select id="departmentFilter" onchange="filterAndSearch()">
                 <option value="all">All Departments</option>
-                <option value="IT Division">IT Division</option>
-                <option value="APAC Division">APAC Division</option>
-                <option value="Marketing Division">Marketing Division</option>
-                <option value="Human Resource Department">Human Resource Department</option>
             </select>
             <select id="durationFilter" onchange="filterAndSearch()">
                 <option value="all">All Durations</option>
-                <option value="Permanent position">Permanent</option>
-                <option value="Temporary position">Temporary</option>
             </select>
             <select id="gradeFilter" onchange="filterAndSearch()">
                 <option value="all">All Grades</option>
-                <option value="4 Grade">4 Grade</option>
-                <option value="6 Grade">6 Grade</option>
-                <option value="10 Grade">10 Grade</option>
             </select>
         </div>
         <div class="lang-zh">
             <input type="text" id="searchInputZh" placeholder="搜尋職位..." oninput="filterAndSearch()">
             <select id="departmentFilterZh" onchange="filterAndSearch()">
                 <option value="all">所有部門</option>
-                <option value="IT Division">資訊技術部門</option>
-                <option value="APAC Division">亞太區部門</option>
-                <option value="Marketing Division">行銷部門</option>
-                <option value="Human Resource Department">人力資源部門</option>
             </select>
             <select id="durationFilterZh" onchange="filterAndSearch()">
                 <option value="all">所有性質</option>
-                <option value="Permanent position">長期</option>
-                <option value="Temporary position">短期</option>
             </select>
             <select id="gradeFilterZh" onchange="filterAndSearch()">
                 <option value="all">所有職等</option>
-                <option value="4 Grade">4 職等</option>
-                <option value="6 Grade">6 職等</option>
-                <option value="10 Grade">10 職等</option>
             </select>
         </div>
     </div>
@@ -356,6 +338,73 @@
     <script>
         let allJobs = [];
 
+        function populateFilterOptions() {
+            const departments = new Set();
+            const durations = new Set();
+            const grades = new Set();
+
+            allJobs.forEach(job => {
+                departments.add(job.department);
+                durations.add(job.duration);
+                grades.add(job.grade);
+            });
+
+            const departmentFilterEn = document.getElementById('departmentFilter');
+            const durationFilterEn = document.getElementById('durationFilter');
+            const gradeFilterEn = document.getElementById('gradeFilter');
+
+            const departmentFilterZh = document.getElementById('departmentFilterZh');
+            const durationFilterZh = document.getElementById('durationFilterZh');
+            const gradeFilterZh = document.getElementById('gradeFilterZh');
+
+            departmentFilterEn.innerHTML = '<option value="all">All Departments</option>';
+            durationFilterEn.innerHTML = '<option value="all">All Durations</option>';
+            gradeFilterEn.innerHTML = '<option value="all">All Grades</option>';
+
+            departmentFilterZh.innerHTML = '<option value="all">所有部門</option>';
+            durationFilterZh.innerHTML = '<option value="all">所有性質</option>';
+            gradeFilterZh.innerHTML = '<option value="all">所有職等</option>';
+
+            departments.forEach(dept => {
+                const optionEn = document.createElement('option');
+                optionEn.value = dept;
+                optionEn.textContent = dept;
+                departmentFilterEn.appendChild(optionEn);
+
+                const optionZh = document.createElement('option');
+                optionZh.value = dept;
+                const job = allJobs.find(j => j.department === dept);
+                optionZh.textContent = job ? job.department_zh : dept;
+                departmentFilterZh.appendChild(optionZh);
+            });
+
+            durations.forEach(duration => {
+                const optionEn = document.createElement('option');
+                optionEn.value = duration;
+                optionEn.textContent = duration;
+                durationFilterEn.appendChild(optionEn);
+
+                const optionZh = document.createElement('option');
+                optionZh.value = duration;
+                const job = allJobs.find(j => j.duration === duration);
+                optionZh.textContent = job ? job.duration_zh : duration;
+                durationFilterZh.appendChild(optionZh);
+            });
+
+            grades.forEach(grade => {
+                const optionEn = document.createElement('option');
+                optionEn.value = grade;
+                optionEn.textContent = grade;
+                gradeFilterEn.appendChild(optionEn);
+
+                const optionZh = document.createElement('option');
+                optionZh.value = grade;
+                const job = allJobs.find(j => j.grade === grade);
+                optionZh.textContent = job ? job.grade_zh : grade;
+                gradeFilterZh.appendChild(optionZh);
+            });
+        }
+
         function setLanguage(lang) {
             document.documentElement.lang = lang;
             localStorage.setItem('lang', lang);
@@ -378,9 +427,25 @@
             try {
                 const response = await fetch('jobs.json');
                 allJobs = await response.json();
+
+                populateFilterOptions();
+
                 renderJobCards();
             } catch (error) {
                 console.error('Failed to fetch jobs:', error);
+                const jobListingsContainer = document.getElementById('job-listings');
+                jobListingsContainer.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #666;">
+                        <div class="lang-en">
+                            <h3>Unable to load job listings</h3>
+                            <p>Please check if the jobs.json file exists and is accessible.</p>
+                        </div>
+                        <div class="lang-zh">
+                            <h3>無法載入職位列表</h3>
+                            <p>請檢查 jobs.json 檔案是否存在且可存取。</p>
+                        </div>
+                    </div>
+                `;
             }
         }
 
