@@ -386,8 +386,18 @@
 
                 const optionZh = document.createElement('option');
                 optionZh.value = duration;
-                const job = allJobs.find(j => j.duration === duration);
-                optionZh.textContent = job ? job.duration_zh : duration;
+                let displayName = duration;
+                if (duration.includes('Permanent')) {
+                    displayName = '長期職位';
+                } else if (duration.includes('Temporary')) {
+                    displayName = '短期職位';
+                } else {
+                    const job = allJobs.find(j => j.duration === duration);
+                    if (job && job.duration_zh) {
+                        displayName = job.duration_zh.split('/')[0].trim();
+                    }
+                }
+                optionZh.textContent = displayName;
                 durationFilterZh.appendChild(optionZh);
             });
 
@@ -429,7 +439,7 @@
                 allJobs = await response.json();
 
                 populateFilterOptions();
-
+                
                 renderJobCards();
             } catch (error) {
                 console.error('Failed to fetch jobs:', error);
