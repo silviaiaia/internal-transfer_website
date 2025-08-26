@@ -177,6 +177,12 @@
             gap: 10px;
             margin: 20px 0;
         }
+
+        .highlight {
+            color: #DA5312;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
@@ -202,9 +208,9 @@
             <div class="instructions">
                 <h3>📖 使用說明：</h3>
                 <ol>
-                    <li>按照以下格式準備 Excel 檔案<br><strong>請注意：任何的格式錯誤都會導致系統無法辨識資料</strong></br></li>
+                    <li>按照以下格式準備 Excel 檔案<br><span class="highlight">請注意：任何的格式錯誤都會導致系統無法辨識資料</span></br></li>
                     <li>上傳檔案並預覽轉換結果</li>
-                    <li>確認無誤後下載 jobs.json 檔案<strong>（請將檔案名稱保持 jobs.json）</strong></li>
+                    <li>確認無誤後下載 jobs.json 檔案<span class="highlight">（請將檔案名稱保持 jobs.json）</span></li>
                     <li>將下載的 jobs.json 檔案上傳到系統替換原檔案</li>
                     <li>系統會自動更新網站內容</li>
                 </ol>
@@ -248,15 +254,15 @@
                 <p>請確保您的 Excel 檔案包含以下欄位（順序可以不同）：</p>
                 <ul>
                     <li><strong>id</strong>
-                        <p>職位唯一識別碼（如：se, pm, ms）</p></li>
+                        <p>職位唯一識別碼（如：se001, pm001, ms001）</p></li>
                     <li><strong>department</strong>
                         <p>部門名稱（英文）</p></li>
                     <li><strong>department_zh</strong>
                         <p>部門名稱（中文）</p></li>
                     <li><strong>duration</strong>
-                        <p>職位性質（英文）：Permanent position or Temporary position</p></li>
+                        <p>職位性質（英文）：<span class="highlight">Permanent position</span> or <span class="highlight">Temporary position</span></p></li>
                     <li><strong>duration_zh</strong>
-                        <p>工作性質（中文）：長期職位 或 短期職位</p></li>
+                        <p>工作性質（中文）：<span class="highlight">長期職位</span> 或 <span class="highlight">短期職位</span></p></li>
                     <li><strong>grade</strong>
                         <p>職等（英文）</p></li>
                     <li><strong>grade_zh</strong>
@@ -270,9 +276,9 @@
                     <li><strong>summary_zh</strong>
                         <p>職位摘要（中文）</p></li>
                     <li><strong>description_en</strong>
-                        <p>工作內容（英文，用半形分號 ; 分隔多項）</p></li>
+                        <p>工作內容（英文，用<span class="highlight">半形分號 ;</span> 分隔多項）</p></li>
                     <li><strong>description_zh</strong>
-                        <p>工作內容（中文，用半形分號 ; 分隔多項）</p></li>
+                        <p>工作內容（中文，用<span class="highlight">半形分號 ;</span> 分隔多項）</p></li>
                     <li><strong>skills_en</strong>
                         <p>所需技能（英文）</p></li>
                     <li><strong>skills_zh</strong>
