@@ -218,6 +218,31 @@
                 </div>
             </div>
 
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>正在處理檔案...</p>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+            <div id="previewContainer" class="job-card" style="display: none;">
+                <h2>👀 資料預覽</h2>
+                <div class="preview-container">
+                    <div id="previewContent"></div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn btn-download" onclick="downloadJSON()" id="downloadBtn" disabled>
+                        💾 下載 jobs.json 檔案
+                    </button>
+                    <button class="btn btn-clear" onclick="clearPreview()">
+                        🗑️ 清除預覽
+                    </button>
+                </div>
+            </div>
+
+            <div id="successMessage" class="success-message" style="display: none;"></div>
+
             <div class="instructions">
                 <h3>📋 Excel 檔案格式要求：</h3>
                 <p>請確保您的 Excel 檔案包含以下欄位（順序可以不同）：</p>
@@ -255,33 +280,7 @@
                     <li><strong>hiring_manager</strong>
                         <p>招聘主管</p></li>
                 </ul>
-            </div>
-
-            <div id="loading" class="loading" style="display: none;">
-                <div class="spinner"></div>
-                <p>正在處理檔案...</p>
-            </div>
-
-            <div id="errorMessage" class="error-message" style="display: none;"></div>
-
-            <div id="previewContainer" class="job-card" style="display: none;">
-                <h2>👀 資料預覽</h2>
-                <div class="preview-container">
-                    <div id="previewContent"></div>
-                </div>
-                
-                <div class="button-group">
-                    <button class="btn btn-download" onclick="downloadJSON()" id="downloadBtn" disabled>
-                        💾 下載 jobs.json 檔案
-                    </button>
-                    <button class="btn btn-clear" onclick="clearPreview()">
-                        🗑️ 清除預覽
-                    </button>
-                </div>
-            </div>
-
-            <div id="successMessage" class="success-message" style="display: none;"></div>
-            
+            </div>            
         </div>
     </div>
 
