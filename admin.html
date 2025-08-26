@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Management Admin Panel</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Microsoft JhengHei, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+        }
+
+        .login-form {
+            text-align: center;
+        }
+
+        .admin-panel {
+            display: none;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            text-align: center;
+        }
+
+        h2 {
+            color: #555;
+            margin: 25px 0 15px 0;
+            font-size: 1.4em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        input[type="password"], 
+        input[type="file"] {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="password"]:focus,
+        input[type="file"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #dc3545, #fd7e14);
+        }
+
+        .preview-container {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .preview-table th,
+        .preview-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 14px;
+        }
+
+        .preview-table th {
+            background-color: #e9ecef;
+            font-weight: 600;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #f5c6cb;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #c3e6cb;
+        }
+
+        .info-box {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #bee5eb;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .instructions {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid #ffeaa7;
+        }
+
+        .instructions h3 {
+            margin-bottom: 10px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 登入表單 -->
+        <div id="loginForm" class="login-form">
+            <h1>🔐 管理員登入</h1>
+            <div class="form-group">
+                <label for="adminPassword">管理員密碼</label>
+                <input type="password" id="adminPassword" placeholder="請輸入管理員密碼">
+            </div>
+            <button class="btn" onclick="login()">登入</button>
+            <div id="loginError" class="error-message" style="display: none;">
+                密碼錯誤，請重新輸入！
+            </div>
+        </div>
+
+        <!-- 管理面板 -->
+        <div id="adminPanel" class="admin-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h1>📊 職位管理系統</h1>
+                <button class="btn btn-danger" onclick="logout()">登出</button>
+            </div>
+
+            <!-- Excel 上傳區域 -->
+            <div class="form-group">
+                <h2>📁 上傳 Excel 檔案</h2>
+                <label for="excelFile">選擇 Excel 檔案 (.xlsx, .xls)</label>
+                <input type="file" id="excelFile" accept=".xlsx,.xls" onchange="handleFileUpload(event)">
+            </div>
+
+            <!-- Excel 格式說明 -->
+            <div class="instructions">
+                <h3>📋 Excel 檔案格式要求：</h3>
+                <p>請確保您的 Excel 檔案包含以下欄位（順序可以不同）：</p>
+                <ul>
+                    <li><strong>id</strong> - 職位唯一識別碼（如：se, pm, ms）</li>
+                    <li><strong>department</strong> - 部門名稱（英文）</li>
+                    <li><strong>department_zh</strong> - 部門名稱（中文）</li>
+                    <li><strong>duration</strong> - 工作性質（英文）</li>
+                    <li><strong>duration_zh</strong> - 工作性質（中文）</li>
+                    <li><strong>grade</strong> - 職等</li>
+                    <li><strong>grade_zh</strong> - 職等（中文）</li>
+                    <li><strong>title_en</strong> - 職位標題（英文）</li>
+                    <li><strong>title_zh</strong> - 職位標題（中文）</li>
+                    <li><strong>summary_en</strong> - 職位摘要（英文）</li>
+                    <li><strong>summary_zh</strong> - 職位摘要（中文）</li>
+                    <li><strong>description_en</strong> - 工作內容（英文，用分號分隔多項）</li>
+                    <li><strong>description_zh</strong> - 工作內容（中文，用分號分隔多項）</li>
+                    <li><strong>skills_en</strong> - 所需技能（英文）</li>
+                    <li><strong>skills_zh</strong> - 所需技能（中文）</li>
+                    <li><strong>hiring_manager</strong> - 招聘主管</li>
+                </ul>
+            </div>
+
+            <!-- 載入中 -->
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>正在處理檔案...</p>
+            </div>
+
+            <!-- 錯誤訊息 -->
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+            <!-- 預覽區域 -->
+            <div id="previewContainer" style="display: none;">
+                <h2>👀 資料預覽</h2>
+                <div class="preview-container">
+                    <div id="previewContent"></div>
+                </div>
+                
+                <div style="text-align: center; margin: 20px 0;">
+                    <button class="btn btn-secondary" onclick="downloadJSON()" id="downloadBtn" disabled>
+                        💾 下載 jobs.json 檔案
+                    </button>
+                    <button class="btn" onclick="clearPreview()">
+                        🗑️ 清除預覽
+                    </button>
+                </div>
+            </div>
+
+            <!-- 成功訊息 -->
+            <div id="successMessage" class="success-message" style="display: none;"></div>
+
+            <!-- 使用說明 -->
+            <div class="info-box">
+                <h3>📖 使用說明：</h3>
+                <ol>
+                    <li>按照上述格式準備 Excel 檔案</li>
+                    <li>上傳檔案並預覽轉換結果</li>
+                    <li>確認無誤後下載 jobs.json 檔案</li>
+                    <li>將下載的 jobs.json 檔案上傳到 GitHub 替換原檔案</li>
+                    <li>GitHub Pages 會自動更新網站內容</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 設定管理員密碼（實際使用時建議使用更複雜的驗證）
+        const ADMIN_PASSWORD = "admin123";
+        let processedData = null;
+
+        function login() {
+            const password = document.getElementById('adminPassword').value;
+            const errorDiv = document.getElementById('loginError');
+            
+            if (password === ADMIN_PASSWORD) {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                errorDiv.style.display = 'none';
+            } else {
+                errorDiv.style.display = 'block';
+                document.getElementById('adminPassword').value = '';
+            }
+        }
+
+        function logout() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+            clearPreview();
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function hideError() {
+            document.getElementById('errorMessage').style.display = 'none';
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            hideError();
+            showLoading();
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, { type: 'array' });
+                    const firstSheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[firstSheetName];
+                    const jsonData = XLSX.utils.sheet_to_json(worksheet);
+
+                    if (jsonData.length === 0) {
+                        throw new Error('Excel 檔案是空的或格式不正確');
+                    }
+
+                    processedData = convertToJobFormat(jsonData);
+                    displayPreview(processedData);
+                    document.getElementById('downloadBtn').disabled = false;
+                    showSuccess(`成功處理 ${processedData.length} 個職位資料！`);
+                } catch (error) {
+                    showError(`處理檔案時發生錯誤: ${error.message}`);
+                    clearPreview();
+                } finally {
+                    hideLoading();
+                }
+            };
+
+            reader.readAsArrayBuffer(file);
+        }
+
+        function convertToJobFormat(rawData) {
+            return rawData.map(row => {
+                // 處理工作內容陣列
+                const descriptionEn = row.description_en ? 
+                    row.description_en.split(';').map(item => item.trim()).filter(item => item) : [];
+                const descriptionZh = row.description_zh ? 
+                    row.description_zh.split(';').map(item => item.trim()).filter(item => item) : [];
+
+                return {
+                    id: row.id || '',
+                    department: row.department || '',
+                    department_zh: row.department_zh || '',
+                    duration: row.duration || '',
+                    duration_zh: row.duration_zh || '',
+                    grade: row.grade || '',
+                    grade_zh: row.grade_zh || '',
+                    title_en: row.title_en || '',
+                    title_zh: row.title_zh || '',
+                    summary_en: row.summary_en || '',
+                    summary_zh: row.summary_zh || '',
+                    description_en: descriptionEn,
+                    description_zh: descriptionZh,
+                    skills_en: row.skills_en || '',
+                    skills_zh: row.skills_zh || '',
+                    hiring_manager: row.hiring_manager || ''
+                };
+            });
+        }
+
+        function displayPreview(data) {
+            const previewContent = document.getElementById('previewContent');
+            const container = document.getElementById('previewContainer');
+
+            let html = `<p><strong>總計 ${data.length} 個職位</strong></p>`;
+            html += '<table class="preview-table">';
+            html += '<thead><tr><th>ID</th><th>職位 (中)</th><th>職位 (英)</th><th>部門</th><th>職等</th><th>性質</th></tr></thead>';
+            html += '<tbody>';
+
+            data.forEach(job => {
+                html += `<tr>
+                    <td>${job.id}</td>
+                    <td>${job.title_zh}</td>
+                    <td>${job.title_en}</td>
+                    <td>${job.department}</td>
+                    <td>${job.grade}</td>
+                    <td>${job.duration}</td>
+                </tr>`;
+            });
+
+            html += '</tbody></table>';
+            previewContent.innerHTML = html;
+            container.style.display = 'block';
+        }
+
+        function downloadJSON() {
+            if (!processedData) {
+                showError('沒有可下載的資料');
+                return;
+            }
+
+            const jsonString = JSON.stringify(processedData, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'jobs.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showSuccess('jobs.json 檔案已下載！請將此檔案上傳到 GitHub 替換原檔案。');
+        }
+
+        function clearPreview() {
+            document.getElementById('previewContainer').style.display = 'none';
+            document.getElementById('downloadBtn').disabled = true;
+            document.getElementById('excelFile').value = '';
+            processedData = null;
+            hideError();
+        }
+
+        // 按 Enter 鍵登入
+        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+    </script>
+</body>
+</html>
