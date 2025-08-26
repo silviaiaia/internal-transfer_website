@@ -520,17 +520,24 @@
 
     function filterAndSearch() {
         const isEnglish = document.documentElement.lang === 'en';
+        
         const searchInput = isEnglish ? document.getElementById('searchInput').value.toLowerCase() : document.getElementById('searchInputZh').value.toLowerCase();
-        const departmentFilter = isEnglish ? document.getElementById('departmentFilter').value : document.getElementById('departmentFilterZh').value;
-        const durationFilter = isEnglish ? document.getElementById('durationFilter').value : document.getElementById('durationFilterZh').value;
-        const gradeFilter = isEnglish ? document.getElementById('gradeFilter').value : document.getElementById('gradeFilterZh').value;
+        
+        const departmentFilterElement = isEnglish ? document.getElementById('departmentFilter') : document.getElementById('departmentFilterZh');
+        const durationFilterElement = isEnglish ? document.getElementById('durationFilter') : document.getElementById('durationFilterZh');
+        const gradeFilterElement = isEnglish ? document.getElementById('gradeFilter') : document.getElementById('gradeFilterZh');
+
+        const departmentFilter = departmentFilterElement.value;
+        const durationFilter = durationFilterElement.value;
+        const gradeFilter = gradeFilterElement.value;
 
         const filteredJobs = allJobs.filter(job => {
-            const cardText = isEnglish ? JSON.stringify(job).toLowerCase() : JSON.stringify(job).toLowerCase();
+            const cardText = JSON.stringify(isEnglish ? job : { ...job, department: job.department_zh, duration: job.duration_zh, grade: job.grade_zh, title: job.title_zh, summary: job.summary_zh, description: job.description_zh, skills: job.skills_zh }).toLowerCase();
             const matchesSearch = cardText.includes(searchInput);
-            const matchesDepartment = departmentFilter === 'all' || job.department === departmentFilter;
-            const matchesDuration = durationFilter === 'all' || job.duration.includes(durationFilter); 
-            const matchesGrade = gradeFilter === 'all' || job.grade === gradeFilter;
+            const matchesDepartment = departmentFilter === 'all' || (isEnglish ? job.department === departmentFilter : job.department_zh === departmentFilter);
+            const matchesDuration = durationFilter === 'all' || (isEnglish ? job.duration.includes(durationFilter) : job.duration_zh.includes(durationFilter));
+            const matchesGrade = gradeFilter === 'all' || (isEnglish ? job.grade === gradeFilter : job.grade_zh === gradeFilter);
+            
             return matchesSearch && matchesDepartment && matchesDuration && matchesGrade;
         });
 
