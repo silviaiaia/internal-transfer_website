@@ -340,12 +340,22 @@
 
         function populateFilterOptions() {
             const departments = new Set();
-            const durations = new Set();
+            const durationTypes = new Set();
             const grades = new Set();
 
             allJobs.forEach(job => {
                 departments.add(job.department);
-                durations.add(job.duration);
+
+                if (job.duration.includes('Permanent')) {
+                    durationTypes.add('Permanent');
+                } else if (job.duration.includes('Temporary')) {
+                    durationTypes.add('Temporary');
+                } else if (job.duration.includes('Contract')) {
+                    durationTypes.add('Contract');
+                } else {
+                    durationTypes.add(job.duration.replace(' position', ''));
+                }
+                
                 grades.add(job.grade);
             });
 
@@ -378,38 +388,21 @@
                 departmentFilterZh.appendChild(optionZh);
             });
 
-            durations.forEach(duration => {
+            durationTypes.forEach(durationType => {
                 const optionEn = document.createElement('option');
-                optionEn.value = duration;
-                let displayNameEn = duration;
-                if (duration.includes('Permanent')) {
-                    displayNameEn = 'Permanent';
-                } else if (duration.includes('Temporary')) {
-                    displayNameEn = 'Temporary';
-                } else if (duration.includes('Contract')) {
-                    displayNameEn = 'Contract';
-                } else {
-                    displayNameEn = duration.replace(' position', '');
-                }
-                optionEn.textContent = displayNameEn;
+                optionEn.value = durationType;
+                optionEn.textContent = durationType;
                 durationFilterEn.appendChild(optionEn);
 
                 const optionZh = document.createElement('option');
-                optionZh.value = duration;
-                let displayName = duration;
-                if (duration.includes('Permanent')) {
-                    displayName = '長期職位';
-                } else if (duration.includes('Temporary')) {
-                    displayName = '短期職位';
-                } else if (duration.includes('Contract')) {
-                    displayName = '合約職位';
-                } else {
-                    const job = allJobs.find(j => j.duration === duration);
-                    if (job && job.duration_zh) {
-                        displayName = job.duration_zh.split('/')[0].trim(); // 移除 "/ 6個月" 等時間資訊
-                    }
+                optionZh.value = durationType;
+                let displayNameZh = durationType;
+                if (durationType === 'Permanent') {
+                    displayNameZh = '長期職位';
+                } else if (durationType === 'Temporary') {
+                    displayNameZh = '短期職位';
                 }
-                optionZh.textContent = displayName;
+                optionZh.textContent = displayNameZh;
                 durationFilterZh.appendChild(optionZh);
             });
 
@@ -593,7 +586,18 @@
 
                 const matchesSearch = cardText.includes(searchInput);
                 const matchesDepartment = departmentFilter === 'all' || department === departmentFilter;
-                const matchesDuration = durationFilter === 'all' || duration.includes(durationFilter); 
+
+                let matchesDuration = durationFilter === 'all';
+                if (!matchesDuration && durationFilter !== 'all') {
+                    if (durationFilter === 'Permanent' && duration.includes('Permanent')) {
+                        matchesDuration = true;
+                    } else if (durationFilter === 'Temporary' && duration.includes('Temporary')) {
+                        matchesDuration = true;
+                    } else if (durationFilter === 'Contract' && duration.includes('Contract')) {
+                        matchesDuration = true;
+                    }
+                }
+                
                 const matchesGrade = gradeFilter === 'all' || grade === gradeFilter;
 
                 if (matchesSearch && matchesDepartment && matchesDuration && matchesGrade) {
