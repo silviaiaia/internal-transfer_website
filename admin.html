@@ -13,14 +13,14 @@
         }
 
         body {
-            font-family: Microsoft JhengHei, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
+            font-family: Microsoft JhengHei;
+            background-color: #F9F9FC;
+            margin: 0;
+            padding: 20px;
             align-items: center;
             justify-content: center;
         }
-
+        
         .container {
             background: rgba(255, 255, 255, 0.95);
             padding: 40px;
@@ -76,26 +76,26 @@
         input[type="password"]:focus,
         input[type="file"]:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #F9F9FC;
+            box-shadow: 0 0 0 3px rgba(248, 248, 252, 0.1);
         }
 
         .btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
+            background-color: #007AB5;
             padding: 12px 30px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
             font-weight: 500;
+            font-color: #FFFFFF;
             transition: all 0.3s ease;
             margin: 10px 5px;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background-color: #007AB5;
         }
 
         .btn:disabled {
@@ -160,8 +160,8 @@
         }
 
         .info-box {
-            background: #d1ecf1;
-            color: #0c5460;
+            background: #6FC6E0;
+            color: #1B2D56;
             padding: 15px;
             border-radius: 8px;
             margin: 20px 0;
@@ -189,8 +189,8 @@
         }
 
         .instructions {
-            background: #fff3cd;
-            color: #856404;
+            background: #6FC6E0;
+            color: #007AB5;
             padding: 15px;
             border-radius: 8px;
             margin: 20px 0;
@@ -214,7 +214,7 @@
     <div class="container">
         <!-- 登入表單 -->
         <div id="loginForm" class="login-form">
-            <h1>🔐 管理員登入</h1>
+            <h1>內轉系統管理登入</h1>
             <div class="form-group">
                 <label for="adminPassword">管理員密碼</label>
                 <input type="password" id="adminPassword" placeholder="請輸入管理員密碼">
@@ -228,7 +228,7 @@
         <!-- 管理面板 -->
         <div id="adminPanel" class="admin-panel">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h1>📊 職位管理系統</h1>
+                <h1>內轉管理系統</h1>
                 <button class="btn btn-danger" onclick="logout()">登出</button>
             </div>
 
@@ -244,22 +244,38 @@
                 <h3>📋 Excel 檔案格式要求：</h3>
                 <p>請確保您的 Excel 檔案包含以下欄位（順序可以不同）：</p>
                 <ul>
-                    <li><strong>id</strong> - 職位唯一識別碼（如：se, pm, ms）</li>
-                    <li><strong>department</strong> - 部門名稱（英文）</li>
-                    <li><strong>department_zh</strong> - 部門名稱（中文）</li>
-                    <li><strong>duration</strong> - 工作性質（英文）</li>
-                    <li><strong>duration_zh</strong> - 工作性質（中文）</li>
-                    <li><strong>grade</strong> - 職等</li>
-                    <li><strong>grade_zh</strong> - 職等（中文）</li>
-                    <li><strong>title_en</strong> - 職位標題（英文）</li>
-                    <li><strong>title_zh</strong> - 職位標題（中文）</li>
-                    <li><strong>summary_en</strong> - 職位摘要（英文）</li>
-                    <li><strong>summary_zh</strong> - 職位摘要（中文）</li>
-                    <li><strong>description_en</strong> - 工作內容（英文，用分號分隔多項）</li>
-                    <li><strong>description_zh</strong> - 工作內容（中文，用分號分隔多項）</li>
-                    <li><strong>skills_en</strong> - 所需技能（英文）</li>
-                    <li><strong>skills_zh</strong> - 所需技能（中文）</li>
-                    <li><strong>hiring_manager</strong> - 招聘主管</li>
+                    <li><strong>id</strong><br>
+                        職位唯一識別碼（如：se, pm, ms）</li>
+                    <li><strong>department</strong><b>
+                        部門名稱（英文）</li>
+                    <li><strong>department_zh</strong><br>
+                        部門名稱（中文）</li>
+                    <li><strong>duration</strong><br>
+                        職位性質（英文）：Permanent or Temporary</li>
+                    <li><strong>duration_zh</strong><br>
+                        工作性質（中文）：長期職位 或 短期職位</li>
+                    <li><strong>grade</strong><br>
+                        職等（英文）</li>
+                    <li><strong>grade_zh</strong><br>
+                        職等（中文）</li>
+                    <li><strong>title_en</strong><br>
+                        職位標題（英文）</li>
+                    <li><strong>title_zh</strong><br>
+                        職位標題（中文）</li>
+                    <li><strong>summary_en</strong><br>
+                        職位摘要（英文）</li>
+                    <li><strong>summary_zh</strong><br>
+                        職位摘要（中文）</li>
+                    <li><strong>description_en</strong><br>
+                        工作內容（英文，用分號；分隔多項）</li>
+                    <li><strong>description_zh</strong><br>
+                        工作內容（中文，用分號；分隔多項）</li>
+                    <li><strong>skills_en</strong><br>
+                        所需技能（英文）</li>
+                    <li><strong>skills_zh</strong><br>
+                        所需技能（中文）</li>
+                    <li><strong>hiring_manager</strong><br>
+                        招聘主管</li>
                 </ul>
             </div>
 
@@ -466,7 +482,7 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
 
-            showSuccess('jobs.json 檔案已下載！請將此檔案上傳到 GitHub 替換原檔案。');
+            showSuccess('jobs.json 檔案已下載！請將此檔案上傳系統替換原檔案。');
         }
 
         function clearPreview() {
