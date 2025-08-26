@@ -86,6 +86,7 @@
             color: #007AB5;
             font-size: 1.1em;
             white-space: nowrap;
+            text-align: right;
         }
 
         .job-card .summary {
@@ -396,12 +397,12 @@
                     <div class="card-header">
                         <div class="lang-en">
                             <h2>${job.title_en}</h2>
-                            <span class="department">${job.department}</span>
                         </div>
                         <div class="lang-zh">
                             <h2>${job.title_zh}</h2>
-                            <span class="department">${job.department_zh}</span>
                         </div>
+                        <span class="department lang-en">${job.department}</span>
+                        <span class="department lang-zh">${job.department_zh}</span>
                     </div>
                     <div class="lang-en">
                         <p class="summary">
