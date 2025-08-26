@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Management Admin Panel</title>
+    <title>Internal Transfer Management Portal</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         body {
@@ -33,6 +33,25 @@
             margin-bottom: 20px;
             padding-left: 20px;
             padding-right: 20px;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .header-left,
+        .header-right,
+        .header-center {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-left {
+            flex-grow: 1;
         }
 
         .btn {
@@ -203,11 +222,15 @@
         </div>
 
         <div id="adminPanel" class="admin-panel">
-            <div class="card-header">
-                <div style="flex-grow: 1;"></div>
-                <h1>內轉管理系統</h1>
-                <button class="btn btn-logout" onclick="logout()">登出</button>
-            </div>
+            <header class="page-header">
+                <div class="header-left"></div>
+                <div class="header-center">
+                    <h1>內轉管理系統</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-logout" onclick="logout()">登出</button>
+                </div>
+            </header>
 
             <div class="instructions">
                 <h3>📖 使用說明：</h3>
