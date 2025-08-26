@@ -18,6 +18,15 @@
             margin: auto;
         }
 
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
         h1 {
             text-align: center;
             color: #000000;
@@ -286,7 +295,6 @@
     </div>
 
     <script>
-        // 設定管理員密碼（實際使用時建議使用更複雜的驗證）
         const ADMIN_PASSWORD = "admin123";
         let processedData = null;
 
@@ -375,7 +383,6 @@
 
         function convertToJobFormat(rawData) {
             return rawData.map(row => {
-                // 處理工作內容陣列
                 const descriptionEn = row.description_en ?
                     row.description_en.split(';').map(item => item.trim()).filter(item => item) : [];
                 const descriptionZh = row.description_zh ?
@@ -456,7 +463,6 @@
             hideError();
         }
 
-        // 按 Enter 鍵登入
         document.getElementById('adminPassword').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
                 login();
