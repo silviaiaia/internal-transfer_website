@@ -369,7 +369,7 @@
             departmentFilterEn.appendChild(optionEn);
 
             const optionZh = document.createElement('option');
-            optionZh.value = allJobs.find(job => job.department === dept).department_zh;
+            optionZh.value = dept; // 將值設為英文鍵值
             optionZh.textContent = allJobs.find(job => job.department === dept).department_zh;
             departmentFilterZh.appendChild(optionZh);
         });
@@ -381,7 +381,7 @@
             durationFilterEn.appendChild(optionEn);
 
             const optionZh = document.createElement('option');
-            optionZh.value = allJobs.find(job => job.duration === dur).duration_zh;
+            optionZh.value = dur; // 將值設為英文鍵值
             optionZh.textContent = allJobs.find(job => job.duration === dur).duration_zh;
             durationFilterZh.appendChild(optionZh);
         });
@@ -393,7 +393,7 @@
             gradeFilterEn.appendChild(optionEn);
 
             const optionZh = document.createElement('option');
-            optionZh.value = allJobs.find(job => job.grade === grade).grade_zh;
+            optionZh.value = grade; // 將值設為英文鍵值
             optionZh.textContent = allJobs.find(job => job.grade === grade).grade_zh;
             gradeFilterZh.appendChild(optionZh);
         });
@@ -403,6 +403,15 @@
         const jobListingsContainer = document.getElementById('job-listings');
         jobListingsContainer.innerHTML = '';
         
+        if (jobs.length === 0) {
+            const message = document.createElement('p');
+            message.style.textAlign = 'center';
+            message.style.marginTop = '20px';
+            message.style.fontSize = '1.2em';
+            message.innerHTML = document.documentElement.lang === 'en' ? 'No jobs found.' : '未找到相關職位。';
+            jobListingsContainer.appendChild(message);
+        }
+
         jobs.forEach(job => {
             const card = document.createElement('div');
             card.className = 'job-card';
@@ -537,9 +546,9 @@
                 (job.title_en.toLowerCase().includes(searchInput) || job.summary_en.toLowerCase().includes(searchInput) || job.skills_en.toLowerCase().includes(searchInput)) :
                 (job.title_zh.toLowerCase().includes(searchInput) || job.summary_zh.toLowerCase().includes(searchInput) || job.skills_zh.toLowerCase().includes(searchInput));
             
-            const matchesDepartment = departmentFilter === 'all' || (isEnglish ? job.department === departmentFilter : job.department_zh === departmentFilter);
-            const matchesDuration = durationFilter === 'all' || (isEnglish ? job.duration.includes(durationFilter) : job.duration_zh.includes(durationFilter));
-            const matchesGrade = gradeFilter === 'all' || (isEnglish ? job.grade === gradeFilter : job.grade_zh === gradeFilter);
+            const matchesDepartment = departmentFilter === 'all' || job.department === departmentFilter;
+            const matchesDuration = durationFilter === 'all' || job.duration.includes(durationFilter);
+            const matchesGrade = gradeFilter === 'all' || job.grade === gradeFilter;
             
             return matchesSearch && matchesDepartment && matchesDuration && matchesGrade;
         });
