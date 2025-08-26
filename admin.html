@@ -19,27 +19,11 @@
         }
 
         h1 {
+            text-align: center;
             color: #000000;
-            margin: 0;
-        }
-
-        .page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
             margin-bottom: 20px;
-        }
-
-        .header-left,
-        .header-right,
-        .header-center {
-            display: flex;
-            align-items: center;
-        }
-
-        .header-left {
-            flex-grow: 1;
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
         .btn {
@@ -210,15 +194,10 @@
         </div>
 
         <div id="adminPanel" class="admin-panel">
-            <header class="page-header">
-                <div class="header-left"></div>
-                <div class="header-center">
-                    <h1>內轉管理系統</h1>
-                </div>
-                <div class="header-right">
-                    <button class="btn btn-logout" onclick="logout()">登出</button>
-                </div>
-            </header>
+            <div class="card-header">
+                <h1>內轉管理系統</h1>
+                <button class="btn btn-logout" onclick="logout()">登出</button>
+            </div>
 
             <div class="instructions">
                 <h3>📖 使用說明：</h3>
