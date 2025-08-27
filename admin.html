@@ -45,7 +45,10 @@
         .btn-logout {
             background-color: #DC3545;
             color: #FFFFFF;
-            margin-left: auto;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
         }
         .btn-logout:hover {
             background-color: #A32D3B;
@@ -81,7 +84,6 @@
             border: 1px solid #E9ECEF;
         }
 
-        /* 新增：登入按鈕置中樣式 */
         .login-btn-container {
             text-align: center;
             margin-top: 20px;
@@ -213,10 +215,9 @@
         </div>
 
         <div id="adminPanel" class="admin-panel">
-            <div class="card-header">
-                <h1>內轉管理系統</h1>
-                <button class="btn btn-logout" onclick="logout()">登出</button>
-            </div>
+            <button class="btn btn-logout" onclick="logout()">登出</button>
+            
+            <h1>內轉管理系統</h1>
 
             <div class="instructions">
                 <h3>📖 使用說明：</h3>
