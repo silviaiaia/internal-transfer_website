@@ -84,7 +84,6 @@
             border: 1px solid #E9ECEF;
         }
 
-        /* 新增：登入按鈕置中樣式 */
         .login-btn-container {
             text-align: center;
             margin-top: 20px;
@@ -197,6 +196,30 @@
             font-weight: bold;
         }
 
+        .btn-logout {
+            background-color: #DC3545;
+            color: #FFFFFF;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .system {
+            text-align: right;
+            padding: 20px 20px 0 0;
+        }
+
+        .system button {
+            color: #000000;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+
     </style>
 </head>
 <body>
@@ -215,6 +238,10 @@
             </div>
         </div>
 
+        <div class="system">
+            <a href="https://silviaiaia.github.io/internal-transfer_website/" id="system-link">回到內轉系統</a>
+        </div>
+        
         <div id="adminPanel" class="admin-panel">
             <button class="btn btn-logout" onclick="logout()">登出</button>
             
