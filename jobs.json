@@ -1,0 +1,144 @@
+[
+  {
+    "id": "job001",
+    "department": "IT Division",
+    "department_zh": "資訊技術部門",
+    "duration": "Permanent position",
+    "duration_zh": "長期職位",
+    "grade": "6 Grade",
+    "grade_zh": "6職等",
+    "title_en": "Software Engineer",
+    "title_zh": "軟體工程師",
+    "summary_en": "Responsible for designing, developing, testing and maintaining software applications.",
+    "summary_zh": "負責設計、開發、測試及維護軟體應用程式。",
+    "description_en": [
+      "Develop efficient and reliable code.",
+      "Participate in requirements analysis, system design and architecture planning.",
+      "Perform unit testing and integration testing to ensure software quality.",
+      "Collaborate with cross-departmental teams to solve technical problems."
+    ],
+    "description_zh": [
+      "開發高效、可靠的程式碼。",
+      "參與需求分析、系統設計與架構規劃。",
+      "進行單元測試與整合測試，確保軟體品質。",
+      "與跨部門團隊協作，共同解決技術問題。"
+    ],
+    "skills_en": "Proficiency in at least one programming language (e.g., Python, Java, JavaScript), familiarity with version control tools (e.g., Git), and good problem-solving skills are required.",
+    "skills_zh": "具備至少一種程式語言（如 Python、Java、JavaScript），熟悉版本控制工具（如 Git），並有良好的問題解決能力。",
+    "hiring_manager": "Mr. Potato"
+  },
+  {
+    "id": "job002",
+    "department": "APAC Division",
+    "department_zh": "亞太區部門",
+    "duration": "Temporary position / 6 months",
+    "duration_zh": "短期職位 / 6個月",
+    "grade": "10 Grade",
+    "grade_zh": "10職等",
+    "title_en": "Project Manager",
+    "title_zh": "專案經理",
+    "summary_en": "Responsible for planning, executing and monitoring projects to ensure they are completed on schedule and within budget.",
+    "summary_zh": "負責規劃、執行與監控專案，確保專案按時程和預算完成。",
+    "description_en": [
+      "Define project scope, objectives, and deliverables.",
+      "Manage project timelines, resources, and risks.",
+      "Coordinate internal teams with external stakeholders.",
+      "Report project progress to management regularly."
+    ],
+    "description_zh": [
+      "定義專案範圍、目標與交付物。",
+      "管理專案時程、資源與風險。",
+      "協調內部團隊與外部利害關係人。",
+      "定期向管理層報告專案進度。"
+    ],
+    "skills_en": "Excellent communication and organizational skills, familiarity with project management methodologies (such as Agile, Scrum), and leadership skills.",
+    "skills_zh": "出色的溝通與組織能力，熟悉專案管理方法論（如 Agile, Scrum），並具備領導力。",
+    "hiring_manager": "Mrs. Popcorn"
+  },
+  {
+    "id": "job003",
+    "department": "Marketing Division",
+    "department_zh": "行銷部門",
+    "duration": "Permanent position",
+    "duration_zh": "長期職位",
+    "grade": "4 Grade",
+    "grade_zh": "4職等",
+    "title_en": "Marketing Specialist",
+    "title_zh": "行銷專員",
+    "summary_en": "Responsible for planning and executing marketing activities to enhance brand awareness and product sales.",
+    "summary_zh": "負責規劃與執行行銷活動，提升品牌知名度與產品銷售。",
+    "description_en": [
+      "Develop marketing strategies and plans.",
+      "Manage social media platforms and content distribution.",
+      "Analyze market trends and competitors.",
+      "Execute online or offline promotional activities."
+    ],
+    "description_zh": [
+      "制定行銷策略與計畫。",
+      "管理社群媒體平台與內容發布。",
+      "分析市場趨勢與競爭對手。",
+      "執行線上或線下推廣活動。"
+    ],
+    "skills_en": "Possess market analysis skills, familiarity with digital marketing tools (e.g. Google Analytics, SEO), and possess creative and copywriting skills.",
+    "skills_zh": "具備市場分析能力，熟悉數位行銷工具（如 Google Analytics, SEO），並有創意與文案寫作能力。",
+    "hiring_manager": "Mr. Avocado"
+  },
+  {
+    "id": "job004",
+    "department": "Human Resource Department",
+    "department_zh": "人力資源部門",
+    "duration": "Temporary position / 12 months",
+    "duration_zh": "短期職位 / 12個月",
+    "grade": "4 Grade",
+    "grade_zh": "4職等",
+    "title_en": "Human Resource Specialist",
+    "title_zh": "人力資源專員",
+    "summary_en": "Support key HR functions to ensure a smooth employee lifecycle. You'll be involved in talent acquisition, performance management, and employee relations.",
+    "summary_zh": "負責規劃與執行行銷活動，提升品牌知名度與產品銷售。",
+    "description_en": [
+      "Manage the end-to-end recruitment process, including sourcing, screening, and interviewing candidates.",
+      "Administer and support performance management processes.",
+      "Assist in the development and implementation of HR policies and procedures.",
+      "Handle employee inquiries and provide timely assistance on HR-related matters."
+    ],
+    "description_zh": [
+      "管理端到端的人才招募流程，包括尋找、篩選和面試候選人。",
+      "執行並支援績效管理流程。",
+      "協助開發與實施人力資源政策和程序。",
+      "處理員工諮詢並提供即時的人資相關協助。"
+    ],
+    "skills_en": "Knowledge of HR principles and practices. Strong communication and interpersonal skills. Proficiency in HRIS (Human Resource Information System) software is preferred.",
+    "skills_zh": "熟悉人力資源原則與實務，精通人資資訊系統 (HRIS) 軟體，並具備強大的溝通和人際交往能力。",
+    "hiring_manager": "Miss. Tangerine"
+  },
+  {
+    "id": "job005",
+    "department": "CSR & Sustainability Department",
+    "department_zh": "企業社會責任與永續發展部",
+    "duration": "Permanent position",
+    "duration_zh": "長期職位",
+    "grade": "12 Grade",
+    "grade_zh": "12職等",
+    "title_en": "Head of Sustainability Committee",
+    "title_zh": "永續委員會主管",
+    "summary_en": "Develop and implement strategies to drive environmental, social, and governance (ESG) performance.",
+    "summary_zh": "負責制定與執行策略，以提升環境、社會與公司治理（ESG）績效。",
+    "description_en": [
+      "Develop and execute a comprehensive corporate sustainability strategy.",
+      "Lead the Sustainability Committee and coordinate cross-functional teams.",
+      "Monitor and report on ESG performance and progress towards sustainability goals.",
+      "Engage with internal and external stakeholders on sustainability issues.",
+      "Stay up-to-date with industry best practices and emerging sustainability trends."
+    ],
+    "description_zh": [
+      "制定並執行全面的企業永續發展策略。",
+      "領導永續委員會並協調跨部門團隊。",
+      "監測和報告 ESG 績效以及永續目標的進展。",
+      "就永續議題與內部及外部利害關係人溝通協作。",
+      "掌握產業最佳實踐與新興永續發展趨勢。"
+    ],
+    "skills_en": "Experience in sustainability or ESG management. Strong leadership and communication skills. Knowledge of global sustainability standards.",
+    "skills_zh": "具備永續發展或 ESG 管理經驗。強大的領導與溝通能力。熟悉全球永續發展標準。",
+    "hiring_manager": "Mrs. Dolphin"
+  }
+]
