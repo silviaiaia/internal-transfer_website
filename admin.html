@@ -84,6 +84,7 @@
             border: 1px solid #E9ECEF;
         }
 
+        /* 新增：登入按鈕置中樣式 */
         .login-btn-container {
             text-align: center;
             margin-top: 20px;
@@ -196,21 +197,6 @@
             font-weight: bold;
         }
 
-        .system {
-            text-align: right;
-            padding: 20px 100px 0 0;
-        }
-
-        .system button {
-            color: #000000;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            margin-left: 5px;
-        }
-
     </style>
 </head>
 <body>
@@ -229,16 +215,8 @@
             </div>
         </div>
 
-        <div class="system">
-                <a href="https://silviaiaia.github.io/internal-transfer_website/" id="system-link">回到內部轉調系統</a>
-        </div>
-
         <div id="adminPanel" class="admin-panel">
             <button class="btn btn-logout" onclick="logout()">登出</button>
-
-            <div class="system">
-                <a href="https://silviaiaia.github.io/internal-transfer_website/" id="system-link">回到內部轉調系統</a>
-            </div>
             
             <h1>內轉管理系統</h1>
 
@@ -273,6 +251,7 @@
                 <h2>👀 資料預覽</h2>
                 <div class="preview-container">
                     <div id="previewContent"></div>
+                <p>（註：id為系統自動創造的流水編號）</p>
                 </div>
                 
                 <div class="button-group">
@@ -292,8 +271,6 @@
                 <p>請確保您的 Excel 檔案包含以下欄位（順序可以不同）：<br>
                     <span class="highlight">欄位名稱需完全相同，包括大小寫以及全半形</span></br></p>
                 <ul>
-                    <li><strong>id</strong>
-                        <p>職位<span class="highlight">唯一</span>識別碼（如：se001, pm001, ms001）</p></li>
                     <li><strong>department</strong>
                         <p>部門名稱（英文）</p></li>
                     <li><strong>department_zh</strong>
@@ -417,14 +394,16 @@
         }
 
         function convertToJobFormat(rawData) {
-            return rawData.map(row => {
+            return rawData.map((row, index) => {
+                const id = `job${String(index + 1).padStart(3, '0')}`;
+                
                 const descriptionEn = row.description_en ?
                     row.description_en.split(';').map(item => item.trim()).filter(item => item) : [];
                 const descriptionZh = row.description_zh ?
                     row.description_zh.split(';').map(item => item.trim()).filter(item => item) : [];
 
                 return {
-                    id: row.id || '',
+                    id: id,
                     department: row.department || '',
                     department_zh: row.department_zh || '',
                     duration: row.duration || '',
