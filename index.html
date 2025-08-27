@@ -358,6 +358,27 @@
     <script>
         let allJobs = [];
 
+        function sortGrades(grades) {
+            return Array.from(grades).sort((a, b) => {
+                const extractNumber = (grade) => {
+                    const match = grade.match(/\d+/);
+                    return match ? parseInt(match[0]) : 0;
+                };
+                
+                const numA = extractNumber(a);
+                const numB = extractNumber(b);
+
+                if (numA && numB) {
+                    return numA - numB;
+                }
+
+                if (numA && !numB) return -1;
+                if (!numA && numB) return 1;
+
+                return a.localeCompare(b);
+            });
+        }
+
         function populateFilterOptions() {
             const departments = new Set();
             const durationTypes = new Set();
@@ -426,7 +447,10 @@
                 durationFilterZh.appendChild(optionZh);
             });
 
-            grades.forEach(grade => {
+            // 使用排序函數對職等進行排序
+            const sortedGrades = sortGrades(grades);
+            
+            sortedGrades.forEach(grade => {
                 const optionEn = document.createElement('option');
                 optionEn.value = grade;
                 optionEn.textContent = grade;
